@@ -51,11 +51,52 @@
 }
 
 #cart {
-    height: 2em;
+    width: 2em;
     margin-left: .3em;
 }
 
 #profile {
-    height: 1.5em;
+    width: 1.5em;
     margin-bottom: .3em;
+}
+.footercontainer {
+    width: 100%;
+    height: 25vh;
+    background-color: rgba(174, 174, 174, 0.647);
+    padding: 1rem;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+#footerlogo {
+    height: 5rem;
+    width: auto;
+    max-width: auto;
+}
+
+.ftrlefttext {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    color: white;
+}
+
+.phone,
+.ig,
+#biqc {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; 
+    margin-bottom: 0.2rem;
+    column-gap: 0.5rem;
+}
+
+#phone,
+#iglogo {
+    height: 2vh;
+    width: auto;
 }
