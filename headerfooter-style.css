@@ -105,3 +105,9 @@ a{
     height: 2vh;
     width: auto;
 }
+
+a
+{
+    text-decoration: none !important;
+    color: white;
+}
