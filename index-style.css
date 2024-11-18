@@ -79,15 +79,18 @@
     line-height: 1;
 }
 
+.popupcontainer{
+    height: 5.5vh;
+    margin-bottom: .4em;
+}
+
 .popup {
     padding: .7em;
-    height: 6vh;
     display: flex;
     justify-content: center;
     text-align: center;
     overflow: hidden;
     white-space: nowrap;
-    position: relative;
 }
 
 .popup span {
@@ -126,4 +129,22 @@
         opacity: 0;
         transform: translateX(-100%);
     }
+}
+
+.maincontainer{
+    display: inline-block;
+    justify-content: center;
+    background-color: rgb(7, 7, 70);
+    height: 40vh;
+    padding: 3em;
+}
+
+.maincontent{
+    color: white;
+    justify-content: center;
+    text-align: center;
+}
+
+.maincontent p:nth-child(1) {
+    text-transform: uppercase;
 }
