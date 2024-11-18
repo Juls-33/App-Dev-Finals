@@ -28,6 +28,11 @@
     justify-items: left; 
 }
 
+a{
+    color: white;
+    text-decoration: none;
+}
+
 .center {
     font-size: 15px;
     display: flex;

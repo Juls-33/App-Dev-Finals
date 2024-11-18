@@ -16,11 +16,11 @@
         </div>
 
         <div class="center">
-            <div>HOME</div>
-            <div>ABOUT</div>
-            <div>PORTFOLIO</div>
-            <div>ORDER</div>
-            <div>CONTACT</div>
+            <div><a href="index.html">HOME</a></div>
+            <div><a href="about.html">ABOUT</a></div>
+            <div><a href="portfolio.html">PORTFOLIO</a></div>
+            <div><a href="order.html">ORDER</a></div>
+            <div><a href="contact.html">CONTACT</a></div>
         </div>
 
         <div class="right">
@@ -35,12 +35,12 @@
 
         <div class="lefttext">
             <div>VIEW OUR</div>
-            <div id="portfoliomain"><b><u>PORTFOLIO</u></b></div>
+            <div id="portfoliomain"><a href="portfolio.html"><b><u>PORTFOLIO</u></b></a></div>
         </div>
 
         <div class="righttext">
             <div>WHAT WE'RE</div>
-            <div id="aboutmain"><b><u>ABOUT</u></b></div>
+            <div id="aboutmain"><a href="about.html"><b><u>ABOUT</u></b></a></div>
         </div>
 
         <div class="centertext">
@@ -66,20 +66,59 @@
             </div>
 
             <div class="mainorderbutton">
-                <p>ORDER NOW</p>
+                <p><a href="order.html">ORDER NOW</a></p>
             </div>
         </div>
 
-        <div class="videomain">
-        <video width="320" height="240" controls>
-            <source src="movie.mp4" type="video/mp4">
-            <source src="movie.ogg" type="video/ogg">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        
-    <div class="footercontainer">
+        <div class="graphicsmain">
+            <video id="video" width="170" height="300" autoplay muted loop controls>
+                <source src="images/video.mp4" type="video/mp4" alt="Video">
+                Your browser does not support the video tag.
+            </video>
 
+            <div class="slideshow">
+                <div class="slidefade">
+                    <img src="images/1.PNG" alt="Image 1">
+                </div>
+                <div class="slidefade">
+                    <img src="images/2.PNG" alt="Image 1">
+                </div>
+                <div class="slidefade">
+                    <img src="images/3.PNG" alt="Image 1">
+                </div>
+                <div class="slidefade">
+                    <img src="images/4.PNG" alt="Image 1">
+                </div>
+            </div>
+        </div>
+
+    <div class="footercontainer">
+        <img id="footerlogo" src="images/whitelogo.png" alt="Logo">
+        <div class="ftrlefttext">
+            <div class="phone">
+                <img id="phone" src="images/phone.png" alt="Phone">
+                <div>+63 9762682977</div>
+            </div>
+
+            <div class="ig">
+                <img id="iglogo" src="images/iglogo.png" alt="Instagram Logo">
+                <div>@tiyarjiz</div>
+            </div>
+
+            <div id="biqc">Based in Quezon City.</div>
+        </div>
     </div>
+
+<script>
+    let slideIndex = 0;
+    showSlides();
+    function showSlides() {
+    let slides = document.querySelectorAll(".slidefade");
+    slides.forEach(slide => slide.style.display = "none");
+    slideIndex++;
+    if (slideIndex > slides.length) slideIndex = 1;
+    slides[slideIndex - 1].style.display = "block";
+    setTimeout(showSlides, 3000); }
+</script>
 </body>
 </html>
