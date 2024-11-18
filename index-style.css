@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.main {
+    position: relative;
+    width: 100%; 
+    height: 93vh; 
+    font-size: 20px;
+}
+
+#mainimage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: 100%;
+}
+
+#centerlogo {
+    position: absolute;
+    top: 45%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    z-index: 1;
+    width: 60rem; 
+}
+
+.lefttext {
+    color: white;
+    position: absolute;
+    top: 85%; 
+    margin-left: 2rem;
+    z-index: 2;
+    line-height: 1;
+}
+
+#portfoliomain{
+    cursor: pointer;
+    transition: color 0.3s ease; 
+}
+
+#portfoliomain:hover {
+    color: gray; 
+}
+
+.righttext {
+    color: white;
+    position: absolute;
+    top: 85%; 
+    right:0;
+    text-align: right;
+    margin-right: 2rem;
+    z-index: 2;
+    line-height: 1;
+}
+
+#aboutmain{
+    cursor: pointer;
+    transition: color 0.3s ease; 
+}
+
+#aboutmain:hover {
+    color: gray; 
+}
+
+.centertext {
+    color: white;
+    position: absolute;
+    top: 75%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    text-align: center;
+    z-index: 2;
+    line-height: 1;
+}
+
+.popup {
+    padding: .7em;
+    height: 6vh;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+}
+
+.popup span {
+    position: absolute;
+    opacity: 0;
+    animation: slideInOut 10s infinite;
+    white-space: nowrap;
+}
+
+.popup span:nth-child(1) {
+    animation-delay: 0s; 
+}
+
+.popup span:nth-child(2) {
+    animation-delay: 5s; 
+}
+
+@keyframes slideInOut {
+    0% {
+        opacity: 0;
+        transform: translateX(100%); 
+    }
+    25% {
+        opacity: 1;
+        transform: translateX(0); 
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(0); 
+    }
+    75% {
+        opacity: 0;
+        transform: translateX(-100%); 
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+}
