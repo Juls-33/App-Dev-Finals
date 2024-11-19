@@ -14,15 +14,20 @@
             <div>EST. 2023</div>
             <div>BORN IN QC</div>
         </div>
-
+    
         <div class="center">
-            <div><a href="index.html">HOME</a></div>
-            <div><a href="about.html">ABOUT</a></div>
-            <div><a href="portfolio.html">PORTFOLIO</a></div>
-            <div><a href="order.html">ORDER</a></div>
-            <div><a href="contact.html">CONTACT</a></div>
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+                &#9776; 
+            </div>
+            <div class="navlinks" id="navlinks">
+                <div><a href="index.html">HOME</a></div>
+                <div><a href="about.html">ABOUT</a></div>
+                <div><a href="portfolio.html">PORTFOLIO</a></div>
+                <div><a href="order.html">ORDER</a></div>
+                <div><a href="contact.html">CONTACT</a></div>
+            </div>
         </div>
-
+    
         <div class="right">
             <img id="profile" src="images/profile.png" alt="Profile">
             <img id="cart" src="images/cart.png" alt="Cart">
@@ -66,5 +71,15 @@
             <div id="biqc">Based in Quezon City.</div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('hamburger').addEventListener('click', function() {
+        const navlinks = document.getElementById('navlinks');
+        navlinks.classList.toggle('show');
+    
+        this.style.color = 'white'; 
+        
+        });
+    </script>
 </body>
 </html>

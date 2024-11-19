@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 * {
     margin: 0;
@@ -9,37 +9,37 @@
 
 .headerbanner {
     width: 100%;
-    /* border: 2px solid red; */
+    position: relative;
+    overflow: hidden; 
 }
 
 #hbanner {
-    width: auto;   
-    height: 100%;   
-    max-width: 100%; 
+    width: 100%;
+    height: auto; 
+    max-height: 20vh;
+    object-fit: cover;
 }
 
-#logohb{
+#logohb {
     position: absolute;
-    top: 21%; 
+    top: 50%; 
     left: 50%; 
     transform: translate(-50%, -50%); 
     z-index: 1;
-    width: 14rem; 
-    /* border: 2px solid red; */
+    width: 100%; 
+    max-width: 150px; 
 }
 
-.titlecontainer{
+.titlecontainer {
     color: rgb(25, 4, 132);
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 7vh;
-    /* border: 3px solid red; */
 }
 
-#abt{
-    margin-bottom: .5rem;
+#abt {
+    margin-bottom: 0.5rem;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 2vw; 
 }

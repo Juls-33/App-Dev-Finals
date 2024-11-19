@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-* {
+*,
+html {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -11,14 +12,18 @@
     position: relative;
     width: 100%; 
     height: 93vh; 
-    font-size: 20px;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 #mainimage {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    max-width: 100%;
 }
 
 #centerlogo {
@@ -27,64 +32,69 @@
     left: 50%; 
     transform: translate(-50%, -50%); 
     z-index: 1;
-    width: 60rem; 
+    max-width: 70%;
+    height:auto; 
+}
+
+.lefttext, .righttext {
+    color: white;
+    position: absolute;
+    bottom: 7%; 
+    z-index: 2;
+    line-height: 1;
+    font-size: 1.2rem; 
 }
 
 .lefttext {
-    color: white;
-    position: absolute;
-    top: 85%; 
-    margin-left: 2rem;
-    z-index: 2;
-    line-height: 1;
-}
-
-#portfoliomain{
-    cursor: pointer;
-    transition: color 0.3s ease; 
-}
-
-#portfoliomain:hover {
-    color: gray; 
+    left: 2rem;
+    text-align: left;
 }
 
 .righttext {
-    color: white;
-    position: absolute;
-    top: 85%; 
-    right:0;
+    right: 2rem;
     text-align: right;
-    margin-right: 2rem;
-    z-index: 2;
-    line-height: 1;
-}
-
-#aboutmain{
-    cursor: pointer;
-    transition: color 0.3s ease; 
-}
-
-#aboutmain:hover {
-    color: gray; 
 }
 
 .centertext {
     color: white;
     position: absolute;
-    top: 75%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    text-align: center;
+    bottom: 20%; 
     z-index: 2;
     line-height: 1;
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+#portfoliomain a{
+    cursor: pointer;
+    transition: color 0.3s ease; 
+}
+
+#portfoliomain a:hover {
+    color: gray; 
+}
+
+#aboutmain a:hover {
+    color: gray; 
+}
+
+#aboutmain a{
+    cursor: pointer;
+    transition: color 0.3s ease; 
+}
+
+.center a:hover {
+    color: gray; 
 }
 
 .popupcontainer {
     display: flex; 
     justify-content: center; 
     align-items: center; 
-    height: 5.5vh; 
-    margin-bottom: .4em;
+    height: auto; 
+    padding: 0.5em 1em;
+    margin-bottom: 1em;
+    background-color: #fff;
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -93,8 +103,7 @@
     justify-content: center;
     align-items: center; 
     text-align: center;
-    overflow: hidden;
-    white-space: nowrap;
+    gap: 1em;
     padding: .7em;
 }
 
@@ -141,29 +150,26 @@
     flex-direction: column; 
     justify-content: center;
     align-items: center;
-    height: 30vh;
+    padding:2rem;
+    text-align: center;
 }
 
 .maincontent {
-    color: rgb(0, 0, 0);
-    justify-content: center;
-    text-align: center;
-    width: 100%;
+    max-width: 90%;
+    line-height: 1.5;
 }
 
 .maincontent p:nth-child(1) {
+    font-size: 1.5rem;
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 19px;
 }
 
 .mainorderbutton {
-    color: white;
     background-color:  rgb(25, 4, 132);
-    font-size: 15px;
-    border: 2px solid  rgb(25, 4, 132);
-    padding: .3em;
+    padding: 0.5em 1em;
     border-radius: 10px;
+    color: white;
     cursor: pointer;
     transition: transform 0.3s ease; 
     margin-top: 1.5em;
@@ -172,47 +178,36 @@
 .mainorderbutton:hover {
     transform: scale(1.1); 
     font-weight: bold;
+    background-color: rgb(30, 6, 150);
 }
 
 .graphicsmain {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem; 
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 60vh;
-    gap: 1rem; 
-    padding: 1rem; 
+    padding: 1rem;  
 }
 
-#video {
-    position: relative;
-    width: 15vw; 
-    max-width: 100%; 
-    height: auto;
-    border: 2px solid black;
-    margin-bottom: 2rem;
-}
-
+#video,
 .slideshow {
-    position: relative; 
-    width: 15vw; 
-    max-width: 100%; 
+    flex: 1 1 300px;
+    max-width: 300px; 
+    aspect-ratio: 3 / 5;
     overflow: hidden;
     height: auto;
-    border: 2px solid black;
-    margin-bottom: 2rem;
+    display: block;
 }
 
-.slidefade {
-    display: none;
-    width: 100%;
-}
-
-img {
-    width: 100%;
+.slidefade img{
     height: auto;
-    vertical-align: middle;
+    width: 100%;
+    object-fit: cover;
+}
+
+#video{
+    object-fit: cover;
 }
 
 .fade {

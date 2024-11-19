@@ -14,21 +14,26 @@
             <div>EST. 2023</div>
             <div>BORN IN QC</div>
         </div>
-
+    
         <div class="center">
-            <div><a href="index.html">HOME</a></div>
-            <div><a href="about.html">ABOUT</a></div>
-            <div><a href="portfolio.html">PORTFOLIO</a></div>
-            <div><a href="order.html">ORDER</a></div>
-            <div><a href="contact.html">CONTACT</a></div>
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+                &#9776; 
+            </div>
+            <div class="navlinks" id="navlinks">
+                <div><a href="index.html">HOME</a></div>
+                <div><a href="about.html">ABOUT</a></div>
+                <div><a href="portfolio.html">PORTFOLIO</a></div>
+                <div><a href="order.html">ORDER</a></div>
+                <div><a href="contact.html">CONTACT</a></div>
+            </div>
         </div>
-
+    
         <div class="right">
             <img id="profile" src="images/profile.png" alt="Profile">
             <img id="cart" src="images/cart.png" alt="Cart">
         </div>
     </div>
-
+    
     <div class="main">
         <img id="mainimage" src="images/bg.jpg" alt="Main Image">
         <img id="centerlogo" src="images/whitelogo.png" alt="White Logo">
@@ -59,10 +64,10 @@
 
         <div class="maincontainer">
             <div class="maincontent">
-                <p>Welcome to TRG — Where your rug dreams come true!</p>
-                <p>At TRG, we’re not just making rugs; we’re crafting epic statements for your space! If you can dream it, we can tuft it.</p>
-                <p>Our custom, tufted rugs are the perfect blend of art and comfort, designed to reflect your unique vibe. Dive into our gallery and see the magic for yourself.</p>
-                <p>Let’s level-up your sapce to be as unique as you are!</p>
+                <p id="fline">Welcome to TRG — Where your rug dreams come true!</p>
+                <br>
+                <p>At TRG, we’re not just making rugs; we’re crafting epic statements for your space! If you can dream it, we can tuft it. Our custom, tufted rugs are the perfect blend of art and comfort, designed to reflect your unique vibe. Dive into our gallery and see the magic for yourself.</p>
+                <br><p>Let’s level-up your sapce to be as unique as you are!</p>
             </div>
 
             <div class="mainorderbutton">
@@ -71,7 +76,7 @@
         </div>
 
         <div class="graphicsmain">
-            <video id="video" width="170" height="300" autoplay muted loop controls>
+            <video id="video" autoplay muted loop controls>
                 <source src="images/video.mp4" type="video/mp4" alt="Video">
                 Your browser does not support the video tag.
             </video>
@@ -119,6 +124,15 @@
     if (slideIndex > slides.length) slideIndex = 1;
     slides[slideIndex - 1].style.display = "block";
     setTimeout(showSlides, 3000); }
+
+    document.getElementById('hamburger').addEventListener('click', function() {
+    const navlinks = document.getElementById('navlinks');
+    navlinks.classList.toggle('show');
+    
+    this.style.color = 'white'; 
+
+    });
+
 </script>
 </body>
 </html>
