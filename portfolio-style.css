@@ -124,3 +124,51 @@
     padding: .5rem;
     border-radius: 10px;
 }
+
+.ocont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.oorderbutton {
+    text-align: center;
+    width: 10rem;
+    background-color:  rgb(25, 4, 132);
+    padding: 0.5em 1em;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease; 
+    margin-top: 1.5em;
+}
+
+.oorderbutton:hover {
+    transform: scale(1.1); 
+    font-weight: bold;
+    background-color: rgb(30, 6, 150);
+}
+
+.pfolcontainer {
+    width: 100vw;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-rows: auto;
+    gap: 30px;
+    padding: 1.5rem;
+    line-height: 1.3rem;
+}
+
+.pfolcontainer img {
+    width: 80%;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+    border: 3px solid black;
+    border-radius: 10%;
+}
+
+.pfolcontainer div {
+    text-align: center;
+}
