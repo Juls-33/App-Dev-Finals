@@ -104,3 +104,9 @@
         transform: translateX(-100%);
     }
 }
+
+#details-container
+{
+    display: flex;
+    flex-direction: column;
+}
