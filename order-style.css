@@ -32,7 +32,7 @@
 
 .titlecontainer {
     color: rgb(25, 4, 132);
-    background-color: ;
+    background-color: white;
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -105,8 +105,128 @@
     }
 }
 
-#details-container
+/* John's Edits */
+
+#order-form
+{
+    padding: 2vw;
+    display: flex;
+    flex-direction: column;
+}
+
+#order-form > *
+{
+    margin: 0 0 2vw 0;
+}
+
+#details-container, #billing-container, #payment-container
 {
     display: flex;
     flex-direction: column;
+    padding: 0 2vw;
+    border-radius: 5px;
+    padding-bottom: 1vw;
+}
+
+#sizes, #photo-container, #notes
+{
+    width: 50%;
+}
+
+#details-logo
+{
+    width: 100%; 
+    max-width: 200px; 
+    filter: invert(1);
+    position: absolute;
+    top: 20%;
+    right: 4vw;
+    top: 390px;
+}
+
+#photo-container
+{
+    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    padding: 2vw;
+    width: 50%;
+}
+
+fieldset > label, p
+{ 
+    margin-top: 1vw;
+}
+
+#add-file, #remove-file
+{
+    padding: 0 5px;
+    width: 130px;
+}
+
+textarea
+{
+    padding: 1vw;
+    resize: vertical;
+}
+
+#billing-container
+{
+    input
+    {
+        width: 50%;
+    }
+
+    textarea
+    {
+        width: 100%;
+    }
+}
+
+#payment-container
+{
+    display: flex;
+    flex-direction: row;
+}
+
+#gcash, #bank, #proof
+{
+    label
+    {
+        font-weight: bold;
+    }
+
+    img
+    {
+        width: 18vw;
+        margin: 1vw;
+    }
+
+    margin-top: 1vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid;
+    border-radius: 5px;
+    width: 20vw;
+    margin-right: 2vw;
+}
+
+#payment-proof
+{
+    text-align: center;
+    width: 65%;
+    margin-top: .5vw;
+}
+
+#submit
+{
+    padding: 0 .5vw;
+    font-size: large;
+    color: white;
+    background-color: black;
+    width: 10vw;
+    align-self: flex-end;
+    border-radius: 5px;
+    height: 50px; 
 }

@@ -52,15 +52,18 @@
         </div>
     </div>
 
-    <form id="details-container">
+    <!-- John's Edits -->
 
-        <fieldset>
+    <form id="order-form">
 
-            <legend>Order Details</legend>
+        <fieldset id="details-container">
 
-            <span>Size:</span>
+            <img id="details-logo" src="images/whitelogo.png" alt="White Logo">
 
-            <select name="cars" id="cars">
+            <legend>&#160;Order Details&#160;</legend>
+
+            <label for="size">Size:</label>
+            <select name="sizes" id="sizes">
 
                 <option value="square">Square - 10 x 10 in. [Php 800.00]</option>
                 <option value="rectangle">Rectangle - 20 x 10 in. [Php 1000.00]</option>
@@ -70,11 +73,85 @@
 
             </select>
 
+
+            <label for="photo">Upload Photo Here:</label>
+            <div id="photo-container">
+
+                <input type="file" name="photo" class="photo" value="Choose File">
+            
+                <button id="add-file">Add Another File</button>
+
+                <button id="remove-file">Remove File</button>
+
+            </div>
+
+            <p id="photo-prompt">The photos uploaded will be used to guide<br>us in making your customized rug.</p>
+
+            <label for="notes">Notes:</label>
+            <textarea name="notes" id="notes" placeholder="Type your notes here"></textarea>
+
         </fieldset>
 
-    </form>
+        <fieldset id="billing-container">
+
+            <legend>&#160;Billing Information&#160;</legend>
+
+           <label for="fname">First Name:</label>
+           <input type="text" name="fname" id="fname">
+
+           <label for="lname">First Name:</label>
+           <input type="text" name="lname" id="lname">
+
+           <label for="email">Active Email:</label>
+           <input type="text" name="email" id="email">
+
+           <label for="instagram">Instagram Username:</label>
+           <input type="text" name="instagram" id="instagram">
+
+           <label for="number">Mobile Number:</label>
+           <input type="text" name="number" id="number">
+
+            <label for="address">Address:</label>
+            <textarea name="address" id="address" placeholder="Type your address here"></textarea>
+
+            <label for="notes">Notes:</label>
+            <textarea name="notes" id="notes" placeholder="Type your notes here"></textarea>
+
+        </fieldset>
+
+        <fieldset id="payment-container">
+            
+            <legend>&#160;Payment Details   &#160;</legend>
+
+            <div id="gcash">
+
+                <label for="logo">GCash</label>
+                <img src="images\gcash.png" alt="gcash.png">
+
+            </div>
+
+            <div id="bank">
+
+                <label for="logo">Bank</label>
+                <img src="images\bank.png" alt="bank.png">
+
+            </div>
+
+            
+            <div id="proof">
+
+                <label for="proof">Upload Proof of Payment Here:</label>
+                <input type="file" id="payment-proof">
+
+            </div>
+
+        </fieldset>
+
+        <input type="submit" id="submit">
 
     </form>
+
+    <!-- John's Edits -->
 
     <div class="footercontainer">
         <img id="footerlogo" src="images/whitelogo.png" alt="Logo">
@@ -101,6 +178,38 @@
         this.style.color = 'white'; 
         
         });
+
+        const photoContainer = document.getElementById("photo-container");
+        const addFile = document.getElementById("add-file");
+        const removeFile = document.getElementById("remove-file");
+        const breakLine = document.getElementById("break");
+        
+
+        addFile.addEventListener("click", function()
+        {
+            event.preventDefault();
+            
+            const newPhoto = document.createElement("input");
+            newPhoto.type = "file"
+            newPhoto.className = "photo"
+
+            photoContainer.insertBefore(newPhoto, addFile)
+        });
+
+        removeFile.addEventListener("click", function(event)
+        {
+            const photo = photoContainer.querySelectorAll(".photo");
+
+            event.preventDefault();
+
+            if(photo.length > 1)
+            {
+                photoContainer.removeChild(photo[photo.length - 1])
+            }
+        });
+        
+    
+
     </script>
 </body>
 </html>
