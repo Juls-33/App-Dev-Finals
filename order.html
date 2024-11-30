@@ -9,7 +9,12 @@
     <link rel="stylesheet" href="order-style.css">
 </head>
 <body>
+
+    <div id="progress"></div>
+    <div id="negative"></div>
+    
     <div class="headercontainer">
+        
         <div class="leftgrid">
             <div>EST. 2023</div>
             <div>BORN IN QC</div>
@@ -208,7 +213,20 @@
             }
         });
         
-    
+        let progress = document.getElementById("progress");
+        let docHeight = document.documentElement.scrollHeight;
+        let vpHeight = document.documentElement.clientHeight;
+        
+        
+
+
+        window.onscroll = function()
+        {
+
+            let percentage = (scrollY / (docHeight - vpHeight)) * 100;
+
+            progress.style.width = percentage + "%"
+        }
 
     </script>
 </body>
