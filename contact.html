@@ -52,13 +52,31 @@
         </div>
     </div>
     
-    
-
-
-
-
-
-
+    <form>
+        <div class="mainform">
+            <div class="left-column">
+          <label for="FName">Firstname:</label>
+          <input type="text" id="FName" placeholder=" ex. Andrea" required />
+      
+          <label for="LName">Lastname:</label>
+          <input type="text" id="LName" placeholder=" ex. German" required />
+      
+          <label for="Num">Contact Number:</label>
+          <input type="text" id="Num" maxlength="11" placeholder=" ex. 09762682977" required />
+      
+          <label for="Email">Email Address:</label>
+          <input type="email" id="Email" placeholder=" ex. maandrea.german@gmail.com" required />
+        </div>
+      
+        <div class="right-column">
+          <label for="Comments">Comment/s:</label>
+          <textarea id="Comments" name="Comments" rows="10" cols="50"  required></textarea>
+        </div>
+    </div>
+        <div class="submitcon">
+         <input type="submit" id="Submit" value="Submit" />
+        </div>
+    </form>
 
     <div class="footercontainer">
         <img id="footerlogo" src="images/whitelogo.png" alt="Logo">
@@ -85,6 +103,95 @@
         this.style.color = 'white'; 
         
         });
+
+        const form = document.querySelector("form");
+
+     form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    let namePattern = /^[A-Z][a-z]{1,30}$/;
+    let numPattern = /^09[0-9]{9}$/;
+    let emailPattern = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
+    let commentPattern = /^.{1,100}$/;
+
+    let FNameResult = namePattern.test(form.FName.value);
+    let LNameResult = namePattern.test(form.LName.value);
+    let NumResult = numPattern.test(form.Num.value);
+    let EmailResult = emailPattern.test(form.Email.value);
+    let CommentsResult = commentPattern.test(form.Comments.value);
+
+    if (FNameResult) {
+        form.FName.classList.add("accepted");
+        form.FName.classList.remove("rejected");
+    } else {
+        form.FName.classList.add("rejected");
+        form.FName.classList.remove("accepted");
+    }
+
+    if (LNameResult) {
+        form.LName.classList.add("accepted");
+        form.LName.classList.remove("rejected");
+    } else {
+        form.LName.classList.add("rejected");
+        form.LName.classList.remove("accepted");
+    }
+
+    if (NumResult) {
+        form.Num.classList.add("accepted");
+        form.Num.classList.remove("rejected");
+    } else {
+        form.Num.classList.add("rejected");
+        form.Num.classList.remove("accepted");
+    }
+
+    if (EmailResult) {
+        form.Email.classList.add("accepted");
+        form.Email.classList.remove("rejected");
+    } else {
+        form.Email.classList.add("rejected");
+        form.Email.classList.remove("accepted");
+    }
+
+    if (CommentsResult) {
+        form.Comments.classList.add("accepted");
+        form.Comments.classList.remove("rejected");
+    } else {
+        form.Comments.classList.add("rejected");
+        form.Comments.classList.remove("accepted");
+    }
+
+    if (FNameResult && LNameResult && NumResult && EmailResult && CommentsResult) {
+        alert("Form submitted successfully!");
+        form.reset();
+    } else {
+        alert("Please re-check your inputs.");
+    }
+});
+
+document.querySelectorAll("input, textarea").forEach((input) => {
+    input.addEventListener("input", () => {
+        let inputPattern;
+
+        if (input.id === "FName" || input.id === "LName") {
+            inputPattern = /^[A-Z][a-z]{1,30}$/;
+        } else if (input.id === "Num") {
+            inputPattern = /^09[0-9]{9}$/;
+        } else if (input.id === "Email") {
+            inputPattern = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
+        } else if (input.id === "Comments") {
+            inputPattern = /^.{1,100}$/;
+        }
+
+        if (inputPattern.test(input.value)) {
+            input.classList.add("accepted");
+            input.classList.remove("rejected");
+        } else {
+            input.classList.add("rejected");
+            input.classList.remove("accepted");
+        }
+    });
+});
+
     </script>
 </body>
 </html>
