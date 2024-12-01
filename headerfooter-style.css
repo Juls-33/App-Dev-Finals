@@ -17,6 +17,39 @@ body {
     z-index: 100;
 }
 
+
+#progressBG
+{
+    background-color: white;
+    position: sticky;
+    height: 100%;
+    width: 100vw;
+    top: 0;
+    z-index: -1;
+}
+
+#progress
+{
+    background-color: darkblue;
+    position: sticky;
+    height: 10px;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+#negative
+{
+    background-color: white;
+    position: sticky;
+    height: 10px;
+    top: 0;
+    margin-left: auto;
+    width: 100%;
+    z-index: 1;
+    margin-top: -10px;
+}
+
 .leftgrid {
     text-align: left;
     display: grid;
@@ -191,3 +224,4 @@ a {
         transform: translateY(0.1em);
     }
 }
+
