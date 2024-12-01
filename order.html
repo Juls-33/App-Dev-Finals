@@ -152,6 +152,26 @@
 
         </fieldset>
 
+        <div id="success-container">
+
+            <span id="loading-prompt">Processing your order!</span>
+            <div id="loading-order"></div>
+
+            <img src="images/whitelogo.png" alt="whitelogo.png">
+
+            <h1 id="order-received">Order #0123 Received!</h1>
+
+            <span id="order-message">
+
+                We may reach out to you for<br>
+                additional details about your<br>
+                order, so please stay tuned<br>
+                Thank you for your patience!
+
+            </span>
+
+        </div>
+
         <input type="submit" id="submit">
 
     </form>
@@ -212,21 +232,71 @@
                 photoContainer.removeChild(photo[photo.length - 1])
             }
         });
-        
-        let progress = document.getElementById("progress");
-        let docHeight = document.documentElement.scrollHeight;
-        let vpHeight = document.documentElement.clientHeight;
-        
-        
 
-
-        window.onscroll = function()
+        function scroll()
         {
+            let progress = document.getElementById("progress");
+            let docHeight = document.documentElement.scrollHeight;
+            let vpHeight = window.innerHeight;
 
             let percentage = (scrollY / (docHeight - vpHeight)) * 100;
-
             progress.style.width = percentage + "%"
         }
+        
+        window.onscroll = scroll;
+
+        window.onload = scroll;
+        
+        const form = document.getElementById("order-form");
+        const success = document.getElementById("success-container");
+        const received = document.getElementById("order-received");
+        const message = document.getElementById("order-message");
+        const loadingBar = document.getElementById("loading-order");
+        const loadingPrompt = document.getElementById("loading-prompt");
+        
+
+        let id = null;
+
+        form.addEventListener("submit", (event) =>
+        {
+            event.preventDefault();
+
+            received.style.display = "none";
+            message.style.display = "none";
+
+            success.style.display = "flex";
+            loadingBar.style.display = "flex";
+
+            if(id !== null)
+            {
+                clearInterval(id);
+                id = null;
+            }
+
+            let width = 0;
+            loadingBar.style.width = width + "%";
+            
+            id = setInterval(loadingAnimation, 20);
+
+            function loadingAnimation()
+            {
+                loadingPrompt.innerHTML = width + "%";
+                if(width >= 100)
+                {
+                    clearInterval(id)
+                    id = null;
+                    success.style.display = "flex";
+                    loadingPrompt.innerHTML = "Processing Complete!";
+                    received.style.display = "block";
+                    message.style.display = "block";
+                }
+                else
+                {
+                    width++;
+                    loadingBar.style.width = width + "%";
+                }
+            }
+        });
 
     </script>
 </body>
