@@ -1,0 +1,175 @@
+body{
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+.container{
+    background-color: pink;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0;
+}
+.top-panel{
+    background-color: black;
+    width: 100vw;
+    height: 10vh;
+}
+.side-panel{
+    background-color: aqua;
+    width: 15%;
+    height: 90vh;
+}
+.side-buttons{
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.side-buttons.active{
+    background-color: aquamarine;
+}
+
+.main-panel{
+    background-color: bisque;
+    display: flex;
+    flex-wrap: wrap;
+    width: 85%;
+    height: 90vh;
+    justify-content: space-evenly;
+}
+.order-preview{
+    background-color: blueviolet;
+    width: 28%;
+    margin: 0.5rem 0 ;
+}
+.order-preview-header{
+    background-color: cadetblue;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#order-container{
+    width: 65%;
+    background-color: brown;
+    margin: 0.5rem 0    ;
+    padding: 1rem;
+}
+.order-status, .order-title{
+    height: 33%;
+    margin: 0.2rem 0;
+    padding: 0 0.2rem;
+    width: 100%;
+    background-color:azure ;
+}
+.order-title{
+    background-color: aliceblue;
+    text-align: center;
+    
+}
+.order-scroll{
+    border-bottom: 2px gray solid;
+}
+.order-id-tab{
+    margin: 1rem 0 0 1rem;
+}
+.order-id-content{
+    display: flex;
+    margin: 1rem;
+}
+.img-container{
+    width: 50%;
+    padding-right: 1rem;
+}
+.img-container .image{
+    width:100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+/* main content */
+.container-details, .container-2, .container-upload, .container-buttons{
+    background-color: aquamarine;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* padding: 1rem; */
+}
+.container-details span{
+    display: inline-block;
+    width: 25%;
+    background-color: blue;
+    margin: 0 1rem;
+}
+.container-details div{
+    width: 100%;
+    background-color: aqua;
+    margin: 0.5rem 1rem;
+}
+
+.container-picture{
+    width: 40%;
+    margin: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.container-picture button{
+    height: 2rem;
+}
+.image-container{
+    background-color: aqua;
+    width: 100%;
+    max-height: 200px;
+    /* padding-bottom: 60%; */
+}
+.image-container img{
+    width:100%;
+    height: 100%;
+    object-fit: contain;
+}
+.container-notes{
+    width: 40%;
+    background-color: rgb(91, 201, 165);
+    margin: 1rem;
+}
+.customer-notes{
+    margin: 1rem 0;
+    background-color: white;
+    width: 100%;
+}
+
+.container-upload div{
+    width: 100%;
+    margin: 0.5rem 1rem;
+}
+.container-upload span:nth-child(2){
+    background-color: blue;
+    margin-left: 1rem;
+    width: 30%;
+}
+.container-upload span:nth-child(3){
+    display: inline-flex;
+    flex-wrap: wrap;
+    width: 30%;
+    background-color: blue;
+}
+input{
+    width: 90%;
+}
+.container-upload span:nth-child(4){
+    display: inline-flex;
+    flex-wrap:wrap;
+    width: 25%;
+    background-color: BLUE;
+}
+.container-buttons{
+    justify-content: space-around;
+    padding: 1rem 0;
+}
+.container-buttons button{
+    width: 8rem;
+}

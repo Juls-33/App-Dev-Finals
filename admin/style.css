@@ -1,0 +1,169 @@
+body{
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+.container{
+    background-color: pink;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0;
+}
+.top-panel{
+    background-color: black;
+    width: 100vw;
+    height: 10vh;
+}
+.side-panel{
+    background-color: aqua;
+    width: 15%;
+    height: 90vh;
+}
+.side-buttons{
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.side-buttons.active{
+    background-color: aquamarine;
+}
+
+.main-panel{
+    background-color: bisque;
+    display: flex;
+    flex-wrap: wrap;
+    width: 85%;
+    height: 90vh;
+    justify-content: center;
+}
+.title-text{
+    width: 95%;
+    /* background-color: aliceblue; */
+    height: 5%;
+    margin: 1rem;
+    margin-bottom: -1rem;
+    display: flex;
+    align-items: center;
+}
+.top-container, .bottom-container{
+    width: 95%;
+    background-color: brown;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 20%;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+.bottom-container{
+    height: 30%;
+}
+.small-cards{
+    background-color: blueviolet;
+    height: 80%;
+    width: 20%;
+    margin: 1rem;
+    min-width: 130px;
+}
+.big-card{
+    width: 95%;
+    background-color: aqua;
+    height: 30%;
+}
+.message-card{
+    background-color: chocolate;
+    width: 65%;
+    height: 80%;
+    min-width: 430px;
+    margin: 1rem;
+}
+.most-ordered{
+    background-color: coral;
+    width: 25%;
+    height: 80%;
+    min-width: 165px;
+    margin: 1rem;
+}
+
+@media only screen and (max-width: 431px)  {
+    .side-panel{
+        bottom: 0;
+        width: 100%;
+        height: 5%;
+        position: fixed;
+        display: flex;
+        align-items: center;
+    }
+    .side-buttons{
+        height: 100%;
+        width: 33%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .main-panel{
+        background-color: bisque;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: center;
+        overflow-y: scroll;
+    }
+    .title-text{
+        width: 95%;
+        /* background-color: aliceblue; */
+        height: 5%;
+        margin: 1rem;
+        margin-bottom: -1rem;
+        display: flex;
+        align-items: center;
+    }
+    .top-container, .bottom-container{
+        width: 95%;
+        background-color: brown;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-wrap: wrap;
+        height: 40%;
+        margin: 1rem;
+        overflow-y: hidden;
+    }
+    .bottom-container{
+        height: 60%;
+    }
+    .small-cards{
+        background-color: blueviolet;
+        height: 40%;
+        width: 20%;
+        margin: 1rem;
+        min-width: 130px;
+    }
+    .big-card{
+        width: 95%;
+        background-color: aqua;
+        height: 30%;
+        margin: 1rem;
+        overflow-x: auto;
+    }
+    .message-card{
+        background-color: chocolate;
+        width: 50%;
+        /* height: 80%; */
+        min-width: 430px;
+        margin: 1rem;
+    }
+    .most-ordered{
+        background-color: coral;
+        width: 25%;
+        height: 80%;
+        min-width: 165px;
+        margin: 1rem;
+    }
+}
+

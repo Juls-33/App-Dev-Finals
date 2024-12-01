@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRG | Contact Page</title>
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+    <link rel="stylesheet" href="headerfooter-style.css">
+    <link rel="stylesheet" href="contact-style.css">
+</head>
+<body>
+
+    <div id="progress"></div>
+    <div id="negative"></div>
+
+    <div class="headercontainer">
+        <div class="leftgrid">
+            <div>EST. 2023</div>
+            <div>BORN IN QC</div>
+        </div>
+    
+        <div class="center">
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+                &#9776; 
+            </div>
+            <div class="navlinks" id="navlinks">
+                <div><a href="index.html">HOME</a></div>
+                <div><a href="about.html">ABOUT</a></div>
+                <div><a href="portfolio.html">PORTFOLIO</a></div>
+                <div><a href="order.html">ORDER</a></div>
+                <div><a href="contact.html">CONTACT</a></div>
+            </div>
+        </div>
+    
+        <div class="right">
+            <a href="login.html"> <img id="profile" src="images/profile.png" alt="Profile"></a>
+            <a href="cart.html"><img id="cart" src="images/cart.png" alt="Cart"></a>
+        </div>
+    </div>
+
+    <div class="headerbanner">
+        <div class="hbcontents">
+            <img id="hbanner" src="images/hbanner.jpg" alt="Header Banner">
+            <img id="logohb" src="images/whitelogo.png" alt="White Logo">
+        </div>
+    </div>
+
+    <div class="titlecontainer">
+        <p id="abt">CONTACT US</p>
+    </div>
+
+    <div class="popupcontainer">
+        <div class="popup">
+            <span><b>FREE SHIPPING</b> within Metro Manila!</span>
+            <span>Order now and get <b>10% OFF!</b></span>
+        </div>
+    </div>
+    
+    <form action="/userdata" method="POST">
+        
+        <div class="mainform">
+            <div class="left-column">
+          <label for="FName">Firstname:</label>
+          <input type="text" id="FName" name="FName" placeholder=" ex. Andrea" required />
+      
+          <label for="LName">Lastname:</label>
+          <input type="text" id="LName" name="LName"placeholder=" ex. German" required />
+      
+          <label for="Num">Contact Number:</label>
+          <input type="text" id="Num" name="Num" maxlength="11" placeholder=" ex. 09762682977" required />
+      
+          <label for="Email">Email Address:</label>
+          <input type="email" id="Email" name="Email" placeholder=" ex. maandrea.german@gmail.com" required />
+        </div>
+      
+        <div class="right-column">
+          <label for="Comments">Comment/s:</label>
+          <textarea id="Comments" name="Comments" rows="10" cols="50"  required></textarea>
+        </div>
+    </div>
+        <div class="submitcon">
+         <input type="submit" id="Submit" value="Submit" />
+        </div>
+
+        <p>You may also reach us through, <a href="https://www.instagram.com/tiyarjiz/" target=”_blank”>https://www.instagram.com/tiyarjiz/.</a></p>
+
+    </form>
+
+    <div class="footercontainer">
+        <img id="footerlogo" src="images/whitelogo.png" alt="Logo">
+        <div class="ftrlefttext">
+            <div class="phone">
+                <img id="phone" src="images/phone.png" alt="Phone">
+                <div>+63 9762682977</div>
+            </div>
+
+            <div class="ig">
+                <img id="iglogo" src="images/iglogo.png" alt="Instagram Logo">
+                <div>@tiyarjiz</div>
+            </div>
+
+            <div id="biqc">Based in Quezon City.</div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('hamburger').addEventListener('click', function() {
+        const navlinks = document.getElementById('navlinks');
+        navlinks.classList.toggle('show');
+    
+        this.style.color = 'white'; 
+        
+        });
+
+        const form = document.querySelector("form");
+
+            form.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            let namePattern = /^[A-Z][a-z]{1,30}$/;
+            let numPattern = /^09[0-9]{9}$/;
+            let emailPattern = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
+            let commentPattern = /^.{1,100}$/;
+
+            let FNameResult = namePattern.test(form.FName.value);
+            let LNameResult = namePattern.test(form.LName.value);
+            let NumResult = numPattern.test(form.Num.value);
+            let EmailResult = emailPattern.test(form.Email.value);
+            let CommentsResult = commentPattern.test(form.Comments.value);
+            if (FNameResult) {
+                form.FName.classList.add("accepted");
+                form.FName.classList.remove("rejected");
+            } else {
+                form.FName.classList.add("rejected");
+                form.FName.classList.remove("accepted");
+            }
+
+            if (LNameResult) {
+                form.LName.classList.add("accepted");
+                form.LName.classList.remove("rejected");
+            } else {
+                form.LName.classList.add("rejected");
+                form.LName.classList.remove("accepted");
+            }
+
+            if (NumResult) {
+                form.Num.classList.add("accepted");
+                form.Num.classList.remove("rejected");
+            } else {
+                form.Num.classList.add("rejected");
+                form.Num.classList.remove("accepted");
+            }
+
+            if (EmailResult) {
+                form.Email.classList.add("accepted");
+                form.Email.classList.remove("rejected");
+            } else {
+                form.Email.classList.add("rejected");
+                form.Email.classList.remove("accepted");
+            }
+
+            if (CommentsResult) {
+                form.Comments.classList.add("accepted");
+                form.Comments.classList.remove("rejected");
+            } else {
+                form.Comments.classList.add("rejected");
+                form.Comments.classList.remove("accepted");
+            }
+
+            if (FNameResult && LNameResult && NumResult && EmailResult && CommentsResult) {
+                alert("Form submitted successfully!");
+                form.submit();
+                form.reset();
+            } else {
+                alert("Please re-check your inputs.");
+            }
+        });
+
+        document.querySelectorAll("input, textarea").forEach((input) => {
+            input.addEventListener("input", () => {
+                let inputPattern;
+
+                if (input.id === "FName" || input.id === "LName") {
+                    inputPattern = /^[A-Z][a-z]{1,30}$/;
+                } else if (input.id === "Num") {
+                    inputPattern = /^09[0-9]{9}$/;
+                } else if (input.id === "Email") {
+                    inputPattern = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
+                } else if (input.id === "Comments") {
+                    inputPattern = /^.{1,100}$/;
+                }
+
+                if (inputPattern.test(input.value)) {
+                    input.classList.add("accepted");
+                    input.classList.remove("rejected");
+                } else {
+                    input.classList.add("rejected");
+                    input.classList.remove("accepted");
+                }
+            });
+        });
+
+        function scroll()
+        {
+            let progress = document.getElementById("progress");
+            let docHeight = document.documentElement.scrollHeight;
+            let vpHeight = window.innerHeight;
+
+            let percentage = (scrollY / (docHeight - vpHeight)) * 100;
+
+            progress.style.width = percentage + "%"
+        }
+        
+        window.onscroll = scroll;
+
+        window.onload = scroll;
+
+    </script>
+</body>
+</html>

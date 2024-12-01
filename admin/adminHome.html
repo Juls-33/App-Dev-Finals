@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="top-panel"></div>
+        <div class="side-panel" >
+            <div class="side-buttons active">Dashboard</div>
+            <div class="side-buttons">Orders</div>
+            <div class="side-buttons">Message</div>
+        </div>
+        <div class="main-panel">
+            <div class="title-text">Dashboard</div>
+            <div class="top-container" onWheel= "this.scrollLeft+=event.deltaY>0?100:-100">
+                <div class="small-cards">Total Earnings</div>
+                <div class="small-cards">Monthly Earnings</div>
+                <div class="small-cards">Completed Orders</div>
+                <div class="small-cards">Pending Orders</div>
+            </div>
+            <div class="big-card">Priority Orders</div>
+            <div class="bottom-container" onWheel= "this.scrollLeft+=event.deltaY>0?100:-100" >
+                <div class="message-card">Message From Customers</div>
+                <div class="most-ordered">Most Ordered Size</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
