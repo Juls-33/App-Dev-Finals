@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRG | Login Page</title>
-    <link rel="icon" type="image/x-icon" href="images/logo.png">
-    <link rel="stylesheet" href="login-style.css">
-    <link rel="stylesheet" href="headerfooter-style.css">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TRG | Create Account Page</title>
+        <link rel="icon" type="image/x-icon" href="images/logo.png">
+        <link rel="stylesheet" href="createacc-style.css">
+        <link rel="stylesheet" href="headerfooter-style.css">
+    </head>
 </head>
 <body>
     <div class="headercontainer">
@@ -53,15 +55,22 @@
 
 <div class="logincont">
     <form>
-        <h1>LOGIN</h1>
-        <label for="Email">Username or Email:</label>
+        <h1>CREATE ACCOUNT</h1>
+        <br>
+        <label for="Email">Firstname:</label>
+        <input type="text" id="Firstname" required />
+        <br>
+        <label for="Lastname">Lastname:</label>
+        <input type="text" id="Lastname" required />
+        <br>
+        <label for="Email">Email:</label>
         <input type="text" id="Email" required />
         <br>
         <label for="Password">Password:</label>
         <input type="text" id="Password" required />
         <br>
-        <input type="submit" id="Submit" value="Sign In" />
-        <a href="createacc.html"><p>Don't have an account? Create now.</p></a>
+        <input type="submit" id="Submit" value="Sign Up" />
+        <a href="login.html"><p>Already have an account?</p></a>
     </form>
 </div>
 
@@ -91,6 +100,25 @@
         this.style.color = 'white'; 
         
         });
+
+        
+    const form = document.querySelector("form");
+    const emailInput = document.getElementById("Email");
+
+    form.addEventListener("submit", (event) => {
+        event.preventDefault(); 
+        const emailPattern = /^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
+        const emailValue = emailInput.value;
+
+        if (!emailPattern.test(emailValue)) {
+            alert("Please enter a valid email address.");
+            return; 
+        }
+
+        alert("Form submitted successfully!");
+        form.submit(); 
+    });
+
     </script>
 </body>
 </html>
