@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="about-style.css">
 </head>
 <body>
+
+    <div id="progress"></div>
+    <div id="negative"></div>
+
     <div class="headercontainer">
         <div class="leftgrid">
             <div>EST. 2023</div>
@@ -29,7 +33,7 @@
         </div>
     
         <div class="right">
-            <a href="login.html"> <img id="profile" src="images/profile.png" alt="Profile"></a>
+            <a href="login.html"><img id="profile" src="images/profile.png" alt="Profile"></a>
             <a href="cart.html"><img id="cart" src="images/cart.png" alt="Cart"></a>
         </div>
     </div>
@@ -51,12 +55,85 @@
             <span>Order now and get <b>10% OFF!</b></span>
         </div>
     </div>
-    
+  
+    <!-- John's Edits -->
 
+    <div id="artist-container">
 
+        <div id="artist-slideshow">
 
+            <img class="artist-images" src="images/a1.JPG" alt="a1.jpg">
+            <img class="artist-images" src="images/a2.JPG" alt="a1.jpg">
+            <img class="artist-images" src="images/a3.jpg" alt="a1.jpg">
+            <img class="artist-images" src="images/a4.JPG" alt="a1.jpg">
 
+            <div id="artist-buttons">
 
+                <button class="left" onclick="nextArtistImage(-1)">&#10094;</button>
+                <button class="right" onclick="nextArtistImage(1)">&#10095;</button>
+                
+            </div>
+        
+        </div>
+
+        <span>
+
+            <h1>THE ARTIST</h1>
+
+            Hi! I’m Andeng, a passionate creative with a love for art, music, and fashion. My journey has been<br>
+            incredibly inspiring, thanks to the amazing connections I’ve made with local artists, influencers, and<br>
+            brands. These relationships have given me a fantastic kickstart in pursuing my dreams.<br><br>
+
+            I thrive in the local artistic scene of the Philippines, attending local events and collaborating with talented<br>
+            friends who inspire me every day. Their creativity pushes me to carve out my own path and make a name<br>
+            for myself.<br><br>
+
+            In addition to my passion for art, I also love singing and exploring the world of fashion. I believe that<br>
+            creativity comes in many forms, and I’ve always looked forward to express myself through every medium I<br>
+            encounter.
+
+        </span>
+
+    </div>
+
+    <div id="about-container">
+
+        <h1>ALL ABOUT TRG</h1>
+
+        <div id="about-slideshow">
+
+            <img class="about-images" src="images/trg1.jpg" alt="trg1.jpg">
+            <img class="about-images" src="images/trg2.PNG" alt="trg2.PNG">
+
+            <div id="about-buttons">
+
+                <button class="left" onclick="nextAboutImage(-1)">&#10094;</button>
+                <button class="right" onclick="nextAboutImage(1)">&#10095;</button>
+                
+            </div>
+        
+        </div>
+
+        <span>
+
+            TRG was born from a dream to make a statement in the local creative scene in the Philippines. It all started in April 2023 with the vision of a<br>
+            trendsetting brand that could elevate spaces and connect people to their creativity. After months of planning and preparation, the first tufted<br>
+            rug was officially sold on August 16, 2023.<br><br>
+
+            From sourcing materials to managing finances and delicately tufting each piece, every aspect of the business is crafted with dedication and<br>
+            attention to detail. This hands-on approach ensures the creation of customizable rugs that truly reflect the individuality of each customer.<br><br>
+
+            The mission of TRG is simple: to help people feel more connected to their creativity and uniqueness through custom rugs. Each piece is<br>
+            designed not just for home use, but also to elevate events, photoshoots, and various spaces, transforming any setting into a canvas of art and<br>
+            expression.<br><br>
+
+        </span>
+
+        <a href="portfolio.html"><button id="portfolio-button">PORTFOLIO</button></a>
+
+    </div>
+
+    <!-- John's Edits -->
 
     <div class="footercontainer">
         <img id="footerlogo" src="images/whitelogo.png" alt="Logo">
@@ -83,6 +160,74 @@
         this.style.color = 'white'; 
         
         });
+
+        let artistIndex = 1;
+        showArtistImage(artistIndex);
+
+        function nextArtistImage(a)
+        {
+            showArtistImage(artistIndex += a);
+        }
+
+        function showArtistImage(a)
+        {
+            const artistImages = document.getElementsByClassName("artist-images");
+
+            if(a > artistImages.length)
+                artistIndex = 1;
+            else if(a <1)
+                artistIndex = artistImages.length;
+            else
+                artistIndex = a;
+
+            for(let b = 0 ; b < artistImages.length ; b++)
+            {
+                artistImages[b].style.display = "none";
+            }
+
+            artistImages[artistIndex - 1].style.display = "block";
+        }
+
+        let aboutIndex = 1;
+        showAboutImage(aboutIndex);
+
+        function nextAboutImage(x) 
+        {
+            showAboutImage(aboutIndex += x);
+        }
+
+        function showAboutImage(x) 
+        {
+            const aboutImages = document.getElementsByClassName("about-images");
+
+            if (x > aboutImages.length)
+                aboutIndex = 1;
+            else if (x < 1)
+                aboutIndex = aboutImages.length;
+            else
+                aboutIndex = x;
+
+            for (let y = 0; y < aboutImages.length; y++) {
+                aboutImages[y].style.display = "none";
+            }
+
+            aboutImages[aboutIndex - 1].style.display = "block";
+        }
+
+        function scroll()
+        {
+            let progress = document.getElementById("progress");
+            let docHeight = document.documentElement.scrollHeight;
+            let vpHeight = window.innerHeight;
+
+            let percentage = (scrollY / (docHeight - vpHeight)) * 100;
+            progress.style.width = percentage + "%"
+        }
+        
+        window.onscroll = scroll;
+
+        window.onload = scroll;
+
     </script>
 </body>
 </html>

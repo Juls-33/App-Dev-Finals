@@ -32,7 +32,7 @@
 
 .titlecontainer {
     color: rgb(25, 4, 132);
-    background-color: ;
+    background-color: none;
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -103,4 +103,107 @@
         opacity: 0;
         transform: translateX(-100%);
     }
+}
+
+#artist-container
+{
+    margin: 2vw;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid;
+    padding: 1vw;
+    border-radius: 5px;
+
+    img 
+    {
+        width: 300px;
+        display: none;
+        border-radius: 5px 5px 0 0 ;
+    }
+}
+
+button 
+{
+    width: 250px;
+    height: 50px;
+    border: none;
+    color: white;
+    background-color: black;
+    transition: .3s;
+}
+
+button:hover
+{
+    background-color: white;
+    color: black;
+}
+
+.left
+{
+    border-radius: 0 0 0 5px;
+}
+
+.right
+{
+    border-radius: 0 0 5px 0;
+}
+
+#about-container
+{
+    margin: 2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid;
+    padding: 1vw;
+    border-radius: 5px;
+
+    img 
+    {
+        width: 500px;
+        display: none;
+        border-radius: 5px 5px 0 0 ;
+    }
+
+    span 
+    {
+        text-align: center;
+    }
+
+}
+
+#artist-slideshow
+{
+    display: flex;
+    flex-direction: column;
+    margin-right: 1vw;
+}
+
+#about-slideshow
+{
+    display: flex;
+    flex-direction: column;
+    margin: 1vw;
+}
+
+#artist-buttons
+{
+    width: 300px;
+    display: flex;
+}
+
+#about-buttons
+{
+    width: 500px;
+    display: flex;
+}
+
+#portfolio-button
+{
+    border-radius: 5px;
+}
+
+#portfolio-button:hover
+{
+    border: 3px solid
 }

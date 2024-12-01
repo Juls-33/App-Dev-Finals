@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="portfolio-style.css">
 </head>
 <body>
+
+    <div id="progress"></div>
+    <div id="negative"></div>
+
     <div class="headercontainer">
         <div class="leftgrid">
             <div>EST. 2023</div>
@@ -159,6 +163,21 @@
         this.style.color = 'white'; 
         
         });
+
+        function scroll()
+        {
+            let progress = document.getElementById("progress");
+            let docHeight = document.documentElement.scrollHeight;
+            let vpHeight = window.innerHeight;
+
+            let percentage = (scrollY / (docHeight - vpHeight)) * 100;
+            progress.style.width = percentage + "%"
+        }
+        
+        window.onscroll = scroll;
+
+        window.onload = scroll;
+
     </script>
 </body>
 </html>

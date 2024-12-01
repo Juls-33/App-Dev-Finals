@@ -230,28 +230,6 @@ textarea
     height: 50px; 
 }
 
-#progress
-{
-    background-color: darkblue;
-    position: sticky;
-    height: 10px;
-    top: 0;
-    left: 0;
-    z-index: 2;
-}
-
-#negative
-{
-    background-color: white;
-    position: sticky;
-    height: 10px;
-    top: 0;
-    margin-left: auto;
-    width: 100%;
-    z-index: 1;
-    margin-top: -10px;
-}
-
 #success-container
 {
     img 
