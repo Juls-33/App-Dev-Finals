@@ -6,9 +6,106 @@
     <title>TRG | Cart Page</title>
     <link rel="icon" type="image/x-icon" href="images/logo.png">
     <link rel="stylesheet" href="headerfooter-style.css">
-    <link rel="stylesheet" href="order-style.css">
+    <link rel="stylesheet" href="cart-style.css">
 </head>
 <body>
     
+    <div id="progress"></div>
+    <div id="negative"></div>
+    
+    <div class="headercontainer">
+        
+        <div class="leftgrid">
+            <div>EST. 2023</div>
+            <div>BORN IN QC</div>
+        </div>
+    
+        <div class="center">
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+                &#9776; 
+            </div>
+            <div class="navlinks" id="navlinks">
+                <div><a href="index.html">HOME</a></div>
+                <div><a href="about.html">ABOUT</a></div>
+                <div><a href="portfolio.html">PORTFOLIO</a></div>
+                <div><a href="order.html">ORDER</a></div>
+                <div><a href="contact.html">CONTACT</a></div>
+            </div>
+        </div>
+    
+        <div class="right">
+            <a href="login.html"> <img id="profile" src="images/profile.png" alt="Profile"></a>
+            <a href="cart.html"><img id="cart" src="images/cart.png" alt="Cart"></a>
+        </div>
+    </div>
+
+    <div class="headerbanner">
+        <div class="hbcontents">
+            <img id="hbanner" src="images/hbanner.jpg" alt="Header Banner">
+            <img id="logohb" src="images/whitelogo.png" alt="White Logo">
+        </div>
+    </div>
+
+    <div class="titlecontainer">
+        <p id="abt">MY ORDERS</p>
+    </div>
+
+    <div class="popupcontainer">
+        <div class="popup">
+            <span><b>FREE SHIPPING</b> within Metro Manila!</span>
+            <span>Order now and get <b>10% OFF!</b></span>
+        </div>
+    </div>
+
+<div class="ordercont">
+    <div class="order1">
+        <p>Order # 0123</p>
+        <p>Order Placed on October 18, 2024 6:14 PM.</p>
+        <p><u>View Order Details.</u></p>
+    </div>
+
+    <div class="order1">
+        <p>Order # 0124</p>
+        <p>Order Placed on October 18, 2024 6:14 PM.</p>
+        <p><u>View Order Details.</u></p>    
+    </div>
+
+    <p>No other orders. <a href="order.html"><u>Place new order?</u></a></p>
+</div>
+
+
+
+
+
+
+
+
+    
+    <div class="footercontainer">
+        <img id="footerlogo" src="images/whitelogo.png" alt="Logo">
+        <div class="ftrlefttext">
+            <div class="phone">
+                <img id="phone" src="images/phone.png" alt="Phone">
+                <div>+63 9762682977</div>
+            </div>
+
+            <div class="ig">
+                <img id="iglogo" src="images/iglogo.png" alt="Instagram Logo">
+                <div>@tiyarjiz</div>
+            </div>
+
+            <div id="biqc">Based in Quezon City.</div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('hamburger').addEventListener('click', function() {
+        const navlinks = document.getElementById('navlinks');
+        navlinks.classList.toggle('show');
+    
+        this.style.color = 'white'; 
+        
+        });
+    </script>
 </body>
 </html>

@@ -216,3 +216,14 @@ textarea{
     z-index: 1;
     margin-top: -10px;
 }
+
+form p {
+    text-align: center;
+}
+
+form p a {
+    color: black;
+    display: inline-block; 
+    margin: 0 auto; 
+    text-decoration: underline;
+}
