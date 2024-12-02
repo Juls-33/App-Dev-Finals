@@ -59,7 +59,7 @@
 
     <!-- John's Edits -->
 
-    <form id="order-form" method="POST" action="/upload">
+    <form id="order-form" action="/upload" method="POST" >
 
         <fieldset id="details-container">
 
@@ -172,7 +172,7 @@
 
         </div>
 
-        <input type="submit" id="submit">
+        <input type="submit" id="submit" value="submit">
 
     </form>
 
@@ -260,7 +260,7 @@
         form.addEventListener("submit", (event) =>
         {
             event.preventDefault();
-
+            form.submit();
             received.style.display = "none";
             message.style.display = "none";
 

@@ -134,37 +134,55 @@ app.get('/:username', (req, res)=>{
 
 //POST (Getting information from website)
 //Handle file upload 
-app.post ('/upload', upload.single('image'), async (req, res) =>{
-  const { sizes, photo, notes1, fname, lname, email, instagram, number, address, notes2, proof} = req.body;
+app.post('/upload', upload.fields([{ name: 'photo', maxCount: 1 }, { name: 'proof', maxCount: 1 }]), async (req, res) =>{
+  const { sizes, notes1, fname, lname, email, instagram, number, address, notes2} = req.body;
+  console.log(req.body);
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.session.user){
-    // const photoFile = req,files
-    const {buffer, originalName, mimeType }= file;
     try{
-      const response = await drive.files.create({
-        requestBody:{
-          name: originalName,
-          mimeType: mimeType,
-        },
-        media:{
-          mimeType: mimeType,
-          body: Buffer.from(buffer),
-        },
-      });
-      const fileId = response.data.id;
-      await drive.permissions.create({
-        fileId: fileId,
-        requestBody:{
-          role:'reader',
-          type:'anyone',
-        },
-      });
-      const fileUrl = `https://drive.google.com/uc?id=${fileId}`;
+      const photoFile = req.files['photo'][0];
+      const proofFile = req.files['proof'][0];
+      const uploadToDrive = async (pic) =>{
+        const {buffer, originalName, mimeType }= pic;
+        const response = await drive.files.create({
+          requestBody:{
+            name: originalName,
+            mimeType: mimeType,
+          },
+          media:{
+            mimeType: mimeType,
+            body: Buffer.from(buffer),
+          },
+        });
+        const fileId = response.data.id;
+        await drive.permissions.create({
+          fileId: fileId,
+          requestBody:{
+            role:'reader',
+            type:'anyone',
+          },
+        });
+        return `https://drive.google.com/uc?id=${fileId}`;
+      };
 
+      const photoLink = await uploadToDrive(photoFile);
+      const proofLink = await uploadToDrive(proofFile);
+      
       const newOrder = new orderData({
-        size, image, notes, first_name, last_name, email, ig_username, mobile_number, adderss, payment_number, user: req.session.user._id,
+        size: sizes,
+        image: photoLink,
+        notes1: notes1,
+        first_name: fname,
+        last_name: lname,
+        email: email,
+        ig_username: instagram,
+        mobile_number: number,
+        address: address,
+        notes2: notes2,
+        payment_number: proofLink,
+        user: req.session.user._id,
       });
       await newOrder.save();
 
