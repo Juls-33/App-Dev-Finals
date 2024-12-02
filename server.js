@@ -59,13 +59,14 @@ const userInquirySchema = new mongoose.mongoose.Schema({
 const orderSchema = new mongoose.Schema({
   size: String,
   image: String,
-  notes: String,
+  notes1: String,
   first_name: String,
   last_name: String,
   email: String,
   ig_username: String,
   mobile_number: String,
   address: String,
+  notes2: String,
   payment_number: String,
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'userData'}
 })
@@ -134,13 +135,13 @@ app.get('/:username', (req, res)=>{
 //POST (Getting information from website)
 //Handle file upload 
 app.post ('/upload', upload.single('image'), async (req, res) =>{
-  const { size, image, notes, first_name, last_name, email, ig_username, mobile_number, adderss, payment_number} = req.body;
+  const { sizes, photo, notes1, fname, lname, email, instagram, number, address, notes2, proof} = req.body;
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.session.user){
-    const {buffer, originalName, mimeType }= req.file;
-
+    // const photoFile = req,files
+    const {buffer, originalName, mimeType }= file;
     try{
       const response = await drive.files.create({
         requestBody:{

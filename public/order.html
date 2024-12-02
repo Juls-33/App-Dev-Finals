@@ -59,7 +59,7 @@
 
     <!-- John's Edits -->
 
-    <form id="order-form">
+    <form id="order-form" method="POST" action="/upload">
 
         <fieldset id="details-container">
 
@@ -67,7 +67,7 @@
 
             <legend>&#160;Order Details&#160;</legend>
 
-            <label for="size">Size:</label>
+            <label for="sizes">Size:</label>
             <select name="sizes" id="sizes">
 
                 <option value="square">Square - 10 x 10 in. [Php 800.00]</option>
@@ -92,8 +92,8 @@
 
             <p id="photo-prompt">The photos uploaded will be used to guide<br>us in making your customized rug.</p>
 
-            <label for="notes">Notes:</label>
-            <textarea name="notes" id="notes" placeholder="Type your notes here"></textarea>
+            <label for="notes1">Notes:</label>
+            <textarea name="notes1" id="notes" placeholder="Type your notes here"></textarea>
 
         </fieldset>
 
@@ -119,8 +119,8 @@
             <label for="address">Address:</label>
             <textarea name="address" id="address" placeholder="Type your address here"></textarea>
 
-            <label for="notes">Notes:</label>
-            <textarea name="notes" id="notes" placeholder="Type your notes here"></textarea>
+            <label for="notes2">Notes:</label>
+            <textarea name="notes2" id="notes" placeholder="Type your notes here"></textarea>
 
         </fieldset>
 
@@ -146,7 +146,7 @@
             <div id="proof">
 
                 <label for="proof">Upload Proof of Payment Here:</label>
-                <input type="file" id="payment-proof">
+                <input type="file" id="payment-proof" name="proof">
 
             </div>
 
