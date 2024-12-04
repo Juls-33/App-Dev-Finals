@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Combo&family=Single+Day&display=swap');
+
 *,
 html {
     margin: 0;
@@ -28,12 +30,13 @@ html {
 
 #centerlogo {
     position: absolute;
-    top: 45%; 
+    top: 47%; 
     left: 50%; 
     transform: translate(-50%, -50%); 
     z-index: 1;
-    max-width: 70%;
+    max-width: 80%;
     height:auto; 
+
 }
 
 .lefttext, .righttext {
@@ -58,7 +61,7 @@ html {
 .centertext {
     color: white;
     position: absolute;
-    bottom: 20%; 
+    bottom: 15%; 
     z-index: 2;
     line-height: 1;
     text-align: center;
@@ -94,7 +97,8 @@ html {
     height: auto; 
     padding: 0.5em 1em;
     margin-bottom: 1em;
-    background-color: #fff;
+    background-color: rgb(25, 4, 132);
+    color: white;
     box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.5);
 }
 
@@ -155,14 +159,16 @@ html {
 }
 
 .maincontent {
-    max-width: 90%;
+    max-width: 60%;
     line-height: 1.5;
 }
 
 .maincontent p:nth-child(1) {
-    font-size: 1.5rem;
+    font-size: 4rem;
     text-transform: uppercase;
-    font-weight: bold;
+    font-weight: 900;
+    font-family: "Single Day", system-ui;
+    color: rgb(25, 4, 132);
 }
 
 .mainorderbutton {
@@ -173,6 +179,7 @@ html {
     cursor: pointer;
     transition: transform 0.3s ease; 
     margin-top: 1.5em;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.5);
 }
 
 .mainorderbutton:hover {
@@ -188,6 +195,8 @@ html {
     justify-content: center;
     align-items: center;
     padding: 1rem;  
+    margin-bottom: 2rem;
+    
 }
 
 #video,
@@ -198,6 +207,12 @@ html {
     overflow: hidden;
     height: auto;
     display: block;
+    border-radius: 10px;
+    box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.8);
+}
+
+#video:hover, .slideshow:hover{
+    transform: scale(1.02);
 }
 
 .slidefade img{
@@ -223,3 +238,9 @@ html {
     }
 }
 
+
+@media (max-width: 635px) {
+    .maincontent {
+        max-width: 90%;
+    }
+}
