@@ -227,3 +227,14 @@ form p a {
     margin: 0 auto; 
     text-decoration: underline;
 }
+
+.validation{
+    display: flex;
+    justify-content: center;
+    background-color:  rgb(25, 4, 132);
+    color: white;
+}
+
+
+
+
