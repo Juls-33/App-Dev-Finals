@@ -78,6 +78,7 @@
           <textarea id="Comments" name="Comments" rows="10" cols="50"  required></textarea>
         </div>
     </div>
+    <div class = validation></div>
         <div class="submitcon">
          <input type="submit" id="Submit" value="Submit" />
         </div>
@@ -167,12 +168,13 @@
                 form.Comments.classList.remove("accepted");
             }
 
+            let message = document.querySelector(".validation"); 
             if (FNameResult && LNameResult && NumResult && EmailResult && CommentsResult) {
-                alert("Form submitted successfully!");
+                message.innerHTML = "Form submitted successfully. We'll get back to you soon through your email!";
                 form.submit();
                 form.reset();
             } else {
-                alert("Please re-check your inputs.");
+                message.innerHTML = "ERROR: One or more field/s have incorrect inputs.";
             }
         });
 
