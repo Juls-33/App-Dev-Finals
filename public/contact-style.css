@@ -7,103 +7,13 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.headerbanner {
-    width: 100%;
-    position: relative;
-    overflow: hidden; 
-}
-
-#hbanner {
-    width: 100%;
-    height: auto; 
-    max-height: 20vh;
-    object-fit: cover;
-}
 
 #logohb {
-    position: absolute;
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    z-index: 1;
+   
     width: 100%; 
     max-width: 150px; 
 }
 
-.titlecontainer {
-    color: rgb(25, 4, 132);
-    background-color: none;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 2.5rem;
-}
-
-#abt {
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-    font-size: 1.5rem; 
-}
-
-.popupcontainer {
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    height: 2rem; 
-    padding: 0.5em 1em;
-    margin-bottom: 1em;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-    font-size: .8rem;
-}
-
-.popup {
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    text-align: center;
-    gap: 1em;
-    padding: .7em;
-}
-
-.popup span {
-    position: absolute;
-    opacity: 0;
-    animation: slideInOut 10s infinite;
-    white-space: nowrap;
-}
-
-.popup span:nth-child(1) {
-    animation-delay: 0s; 
-}
-
-.popup span:nth-child(2) {
-    animation-delay: 5s; 
-}
-
-@keyframes slideInOut {
-    0% {
-        opacity: 0;
-        transform: translateX(100%); 
-    }
-    25% {
-        opacity: 1;
-        transform: translateX(0); 
-    }
-    50% {
-        opacity: 1;
-        transform: translateX(0); 
-    }
-    75% {
-        opacity: 0;
-        transform: translateX(-100%); 
-    }
-    100% {
-        opacity: 0;
-        transform: translateX(-100%);
-    }
-}
 form {
     display: flex;
     flex-direction: column;
@@ -150,6 +60,7 @@ form {
 input, textarea{
     padding: .5em;
     outline: none;
+    border-radius: 10px;
 }
 
 textarea{
@@ -161,6 +72,12 @@ textarea{
     color: #fff;
     border-radius: 10px;
     width: 10em;
+}
+
+#Submit:hover {
+    transform: scale(1.1); 
+    font-weight: bold;
+    background-color: rgb(30, 6, 150);
 }
 
 .rejected{
