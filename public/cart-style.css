@@ -130,12 +130,13 @@ body::before {
 
 .ordercont {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     flex-wrap: wrap;
     padding: 3em;
     gap: 1rem;
+    height: 60vh;
 }
 
 .order1 {

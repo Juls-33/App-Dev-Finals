@@ -24,7 +24,8 @@ body{
 
 
 .logincont {
-    margin-top: 2em;;
+    height: 60vh;
+    margin-top: 2em;
     display: flex;
     justify-content: center;
     align-items: center;  

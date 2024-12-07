@@ -81,3 +81,10 @@ form a{
     margin-top: .5em;
     text-align: center;
 }
+
+@media (max-width: 635px) {
+    form a{
+        font-size: .8rem;
+    }
+   
+}
