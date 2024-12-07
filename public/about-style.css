@@ -5,6 +5,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    
 }
 
 
@@ -40,9 +41,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 2.5rem;
+    height: 2rem;
     padding: 0.5em;
     margin: 0;
+    margin-top: .4em;
 }
 
 #abt {
@@ -137,7 +139,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: #f0808025;
+    background-color: #9180f025;
     padding: 20px 0;
 }
 
@@ -147,7 +149,7 @@
     flex-direction: row-reverse;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: #8093f025;
+    background-color: #634bec25;
     padding: 20px 0;
 }
 
@@ -237,7 +239,10 @@
     justify-content: center;
     width: 60%;
     margin: 10px;
+   
 }
+
+
 
 @keyframes about-animation 
 {
@@ -281,15 +286,15 @@
     }
 }
 
-#progress
-{
+#progress {
     background-color: darkblue;
     position: sticky;
     height: 10px;
     top: 0;
     left: 0;
-    z-index: 1000;
+    z-index: 2;
 }
+
 
 #negative
 {
