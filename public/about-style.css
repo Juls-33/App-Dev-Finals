@@ -41,7 +41,8 @@
     align-items: center;
     justify-content: center;
     height: 2.5rem;
-    padding: 1.5em;
+    padding: 0.5em;
+    margin: 0;
 }
 
 #abt {
@@ -56,8 +57,9 @@
     align-items: center; 
     height: 2rem; 
     padding: 0.5em 1em;
-    margin-bottom: 1em;
-    background-color: #fff;
+    
+    background-color: rgb(25, 4, 132);
+    color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
     font-size: .8rem;
 }
@@ -109,105 +111,196 @@
     }
 }
 
+/* John's Edits */
+
+#page-content
+{
+    position: relative;
+    z-index: 0; 
+}
+
+#page-content::before 
+{
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('images/trg1.jpg') center/cover no-repeat;
+    opacity: 0.14; 
+    z-index: -1;
+}
+
+#artist
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #f0808025;
+    padding: 20px 0;
+}
+
+#about
+{
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #8093f025;
+    padding: 20px 0;
+}
+
 #artist-container
 {
-    margin: 2vw;
-    display: flex;
-    flex-direction: row;
-    border: 1px solid;
-    padding: 1vw;
-    border-radius: 5px;
-
-    img 
-    {
-        width: 300px;
-        display: none;
-        border-radius: 5px 5px 0 0 ;
-    }
-}
-
-button 
-{
-    width: 250px;
-    height: 50px;
-    border: none;
-    color: white;
-    background-color: black;
-    transition: .3s;
-}
-
-button:hover
-{
-    background-color: white;
-    color: black;
-}
-
-.left
-{
-    border-radius: 0 0 0 5px;
-}
-
-.right
-{
-    border-radius: 0 0 5px 0;
-}
-
-#about-container
-{
-    margin: 2vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid;
-    padding: 1vw;
-    border-radius: 5px;
-
-    img 
-    {
-        width: 500px;
-        display: none;
-        border-radius: 5px 5px 0 0 ;
-    }
-
-    span 
-    {
-        text-align: center;
-    }
-
+    width: 30%;
+    overflow: hidden;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.5);
 }
 
 #artist-slideshow
 {
+    animation: artist-animation 20s infinite ease;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+#artist-slideshow > img
+{
+    width: 100%;
+}
+
+#artist-text
+{
     display: flex;
     flex-direction: column;
-    margin-right: 1vw;
+    text-align: justify;
+    align-items: flex-start;
+    justify-content: center;
+    width: 60%;
+    margin: 10px;
+}
+
+@keyframes artist-animation 
+{
+    0%
+    {
+        transform: translateX(0px);
+    }
+    25%
+    {
+        transform: translateX(-100%);
+    }
+    50%
+    {
+        transform: translateX(-200%);
+    }
+    75%
+    {
+        transform: translateX(-300%);
+    }
+    100%
+    {
+        transform: translateX(0px);
+    }
+}
+
+#about-container
+{
+    width: 30%;
+    overflow: hidden;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.5);
 }
 
 #about-slideshow
 {
+    animation: about-animation 50s infinite ease;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+#about-slideshow > img
+{
+    width: 100%;
+}
+
+#about-text
+{
     display: flex;
     flex-direction: column;
-    margin: 1vw;
+    text-align: justify;
+    align-items: flex-start;
+    justify-content: center;
+    width: 60%;
+    margin: 10px;
 }
 
-#artist-buttons
+@keyframes about-animation 
 {
-    width: 300px;
-    display: flex;
+    0%{transform: translateX(0);}
+    10%{transform: translateX(-100%);}
+    20%{transform: translateX(-200%);}
+    30%{transform: translateX(-300%);}
+    40%{transform: translateX(-400%);}
+    50%{transform: translateX(-500%);}
+    60%{transform: translateX(-600%);}
+    70%{transform: translateX(-700%);}
+    80%{transform: translateX(-800%);}
+    90%{transform: translateX(-900%);}
+    100%{transform: translateX(0);}
 }
 
-#about-buttons
+@media screen and (max-width: 1260px)
 {
-    width: 500px;
-    display: flex;
+    #artist-container
+    {
+        width: 70%;
+    }
+
+    #artist-text
+    {
+        width: 100%;
+        text-align: center;
+        align-items: center;
+    }
+
+    #about-container
+    {
+        width: 70%;
+    }
+
+    #about-text
+    {
+        width: 100%;
+        text-align: center;
+        align-items: center;
+    }
 }
 
-#portfolio-button
+#progress
 {
-    border-radius: 5px;
+    background-color: darkblue;
+    position: sticky;
+    height: 10px;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
-#portfolio-button:hover
+#negative
 {
-    border: 3px solid
+    background-color: white;
+    position: sticky;
+    height: 10px;
+    top: 0;
+    margin-left: auto;
+    width: 100%;
+    z-index: 999;
+    margin-top: -10px;
 }
+
+/* John's Edits */

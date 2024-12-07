@@ -58,79 +58,85 @@
   
     <!-- John's Edits -->
 
-    <div id="artist-container">
+    <div id="page-content">
 
-        <div id="artist-slideshow">
+        <div id="artist">
 
-            <img class="artist-images" src="images/a1.JPG" alt="a1.jpg">
-            <img class="artist-images" src="images/a2.JPG" alt="a1.jpg">
-            <img class="artist-images" src="images/a3.jpg" alt="a1.jpg">
-            <img class="artist-images" src="images/a4.JPG" alt="a1.jpg">
+            <div id="artist-container">
 
-            <div id="artist-buttons">
-
-                <button class="left" onclick="nextArtistImage(-1)">&#10094;</button>
-                <button class="right" onclick="nextArtistImage(1)">&#10095;</button>
-                
+                <div id="artist-slideshow">
+    
+                    <img src="images/a1.JPG" alt="ArtistImage1">
+                    <img src="images/a2.JPG" alt="ArtistImage2">
+                    <img src="images/a3.jpg" alt="ArtistImage3">
+                    <img src="images/a4.JPG" alt="ArtistImage4">
+    
+                </div>
+    
             </div>
-        
+    
+            <div id="artist-text">
+    
+                <h1>THE ARTIST</h1>
+    
+                <p>
+                    Hi! I’m Andeng, a passionate creative with a love for art, music, and fashion. My journey has been
+                    incredibly inspiring, thanks to the amazing connections I’ve made with local artists, influencers, and
+                    brands. These relationships have given me a fantastic kickstart in pursuing my dreams.<br><br>
+    
+                    I thrive in the local artistic scene of the Philippines, attending local events and collaborating with talented
+                    friends who inspire me every day. Their creativity pushes me to carve out my own path and make a name for myself.<br><br>
+                    
+                    In addition to my passion for art, I also love singing and exploring the world of fashion. I believe that
+                    creativity comes in many forms, and I’ve always looked forward to express myself through every medium I encounter.<br><br>
+                </p>
+    
+            </div>
+
         </div>
 
-        <span>
-
-            <h1>THE ARTIST</h1>
-
-            Hi! I’m Andeng, a passionate creative with a love for art, music, and fashion. My journey has been<br>
-            incredibly inspiring, thanks to the amazing connections I’ve made with local artists, influencers, and<br>
-            brands. These relationships have given me a fantastic kickstart in pursuing my dreams.<br><br>
-
-            I thrive in the local artistic scene of the Philippines, attending local events and collaborating with talented<br>
-            friends who inspire me every day. Their creativity pushes me to carve out my own path and make a name<br>
-            for myself.<br><br>
-
-            In addition to my passion for art, I also love singing and exploring the world of fashion. I believe that<br>
-            creativity comes in many forms, and I’ve always looked forward to express myself through every medium I<br>
-            encounter.
-
-        </span>
-
-    </div>
-
-    <div id="about-container">
-
-        <h1>ALL ABOUT TRG</h1>
-
-        <div id="about-slideshow">
-
-            <img class="about-images" src="images/trg1.jpg" alt="trg1.jpg">
-            <img class="about-images" src="images/trg2.PNG" alt="trg2.PNG">
-
-            <div id="about-buttons">
-
-                <button class="left" onclick="nextAboutImage(-1)">&#10094;</button>
-                <button class="right" onclick="nextAboutImage(1)">&#10095;</button>
-                
-            </div>
         
+        <div id="about">
+
+            <div id="about-container">
+
+                <div id="about-slideshow">
+    
+                    <img src="images/p1.jpg" alt="Product1">
+                    <img src="images/p2.jpg" alt="Product2">
+                    <img src="images/p3.jpg" alt="Product3">
+                    <img src="images/p4.jpg" alt="Product4">
+                    <img src="images/p5.jpg" alt="Product5">
+                    <img src="images/p6.jpg" alt="Product6">
+                    <img src="images/p7.jpg" alt="Product7">
+                    <img src="images/p8.jpg" alt="Product8">
+                    <img src="images/p9.jpg" alt="Product9">
+                    <img src="images/p10.jpg" alt="Product10">
+    
+                </div>
+    
+            </div>
+
+            <div id="about-text">
+
+                <h1>ALL ABOUT TRG</h1>
+        
+                <p>
+                    TRG was born from a dream to make a statement in the local creative scene in the Philippines. It all started in April 2023 with the vision of a
+                    trendsetting brand that could elevate spaces and connect people to their creativity. After months of planning and preparation, the first tufted
+                    rug was officially sold on August 16, 2023.<br><br>
+    
+                    From sourcing materials to managing finances and delicately tufting each piece, every aspect of the business is crafted with dedication and
+                    attention to detail. This hands-on approach ensures the creation of customizable rugs that truly reflect the individuality of each customer.<br><br>
+    
+                    The mission of TRG is simple: to help people feel more connected to their creativity and uniqueness through custom rugs. Each piece is designed
+                    not just for home use, but also to elevate events, photoshoots, and various spaces, transforming any setting into a canvas of art and expression.<br><br>
+                </p>
+    
+            </div>
+
         </div>
-
-        <span>
-
-            TRG was born from a dream to make a statement in the local creative scene in the Philippines. It all started in April 2023 with the vision of a<br>
-            trendsetting brand that could elevate spaces and connect people to their creativity. After months of planning and preparation, the first tufted<br>
-            rug was officially sold on August 16, 2023.<br><br>
-
-            From sourcing materials to managing finances and delicately tufting each piece, every aspect of the business is crafted with dedication and<br>
-            attention to detail. This hands-on approach ensures the creation of customizable rugs that truly reflect the individuality of each customer.<br><br>
-
-            The mission of TRG is simple: to help people feel more connected to their creativity and uniqueness through custom rugs. Each piece is<br>
-            designed not just for home use, but also to elevate events, photoshoots, and various spaces, transforming any setting into a canvas of art and<br>
-            expression.<br><br>
-
-        </span>
-
-        <a href="portfolio.html"><button id="portfolio-button">PORTFOLIO</button></a>
-
+    
     </div>
 
     <!-- John's Edits -->
@@ -221,7 +227,7 @@
             let vpHeight = window.innerHeight;
 
             let percentage = (scrollY / (docHeight - vpHeight)) * 100;
-            progress.style.width = percentage + "%"
+            progress.style.width = percentage + "%";
         }
         
         window.onscroll = scroll;
