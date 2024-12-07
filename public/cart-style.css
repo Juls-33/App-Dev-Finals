@@ -24,7 +24,9 @@ body::before {
     z-index: -1;
 }
 
-.banner {
+
+
+.headerbanner {
     width: 100%;
     position: relative;
     overflow: hidden; 
@@ -35,18 +37,20 @@ body::before {
     height: auto; 
     max-height: 20vh;
     object-fit: cover;
+    margin-bottom: 0;
     display: block;
 }
 
 #logohb {
     position: absolute;
-    top: 17%; 
+    top: 50%; 
     left: 50%; 
     transform: translate(-50%, -50%); 
     z-index: 1;
     width: 100%; 
     max-width: 150px; 
 }
+
 
 .titlecontainer {
     color: rgb(25, 4, 132);

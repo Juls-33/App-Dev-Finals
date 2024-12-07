@@ -200,3 +200,10 @@ body::before {
     transform: scale(1.01);
 }
 
+@media (max-width: 635px) {
+    .pfolcontainer {
+        grid-template-columns: 1fr; 
+        padding: 1rem;
+    }
+   
+}
