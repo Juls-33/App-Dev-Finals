@@ -8,6 +8,7 @@
 }
 
 
+
 .headerbanner {
     width: 100%;
     position: relative;
@@ -19,6 +20,7 @@
     height: auto; 
     max-height: 20vh;
     object-fit: cover;
+    display: block;
 }
 
 #logohb {
@@ -33,12 +35,13 @@
 
 .titlecontainer {
     color: rgb(25, 4, 132);
-    background-color: none;
+    background-color: white;
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 2.5rem;
+    padding: 1.5em;
 }
 
 #abt {

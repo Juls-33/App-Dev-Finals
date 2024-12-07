@@ -106,6 +106,21 @@
         this.style.color = 'white'; 
         
         });
+
+        
+        function scroll()
+        {
+            let progress = document.getElementById("progress");
+            let docHeight = document.documentElement.scrollHeight;
+            let vpHeight = window.innerHeight;
+
+            let percentage = (scrollY / (docHeight - vpHeight)) * 100;
+            progress.style.width = percentage + "%"
+        }
+        
+        window.onscroll = scroll;
+
+        window.onload = scroll;
     </script>
 </body>
 </html>

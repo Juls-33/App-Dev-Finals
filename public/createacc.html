@@ -11,6 +11,9 @@
     </head>
 </head>
 <body>
+    <div id="progress"></div>
+    <div id="negative"></div>
+    
     <div class="headercontainer">
         <div class="leftgrid">
             <div>EST. 2023</div>
@@ -36,22 +39,8 @@
         </div>
     </div>
 
-    
-    <div class="headerbanner">
-        <div class="hbcontents">
-            <img id="hbanner" src="images/hbanner.jpg" alt="Header Banner">
-            <img id="logohb" src="images/whitelogo.png" alt="White Logo">
-        </div>
-    </div>
+    <img id="logohb" src="images/whitelogo.png" alt="White Logo">
 
- 
-
-    <div class="popupcontainer">
-        <div class="popup">
-            <span><b>FREE SHIPPING</b> within Metro Manila!</span>
-            <span>Order now and get <b>10% OFF!</b></span>
-        </div>
-    </div>
 
 <div class="logincont">
     <form action="/signup" method="POST">
@@ -119,6 +108,20 @@
         form.submit(); 
     });
 
+    
+    function scroll()
+        {
+            let progress = document.getElementById("progress");
+            let docHeight = document.documentElement.scrollHeight;
+            let vpHeight = window.innerHeight;
+
+            let percentage = (scrollY / (docHeight - vpHeight)) * 100;
+            progress.style.width = percentage + "%"
+        }
+        
+        window.onscroll = scroll;
+
+        window.onload = scroll;
     </script>
 </body>
 </html>

@@ -7,6 +7,22 @@
     font-family: 'Poppins', sans-serif;
 }
 
+body {
+    position: relative;
+}
+
+body::before {
+    content: "";
+    background: url('images/trg1.jpg') no-repeat center center/cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.14;
+    z-index: -1;
+}
+
 .headerbanner {
     width: 100%;
     position: relative;
@@ -18,7 +34,10 @@
     height: auto; 
     max-height: 20vh;
     object-fit: cover;
+    margin-bottom: 0;
+    display: block;
 }
+
 
 #logohb {
     position: absolute;
@@ -32,7 +51,7 @@
 
 .titlecontainer {
     color: rgb(25, 4, 132);
-    background-color: ;
+    background-color:white ;
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -41,9 +60,10 @@
 }
 
 #abt {
-    margin-bottom: 0.5rem;
+    margin: 0;
     font-weight: bold;
     font-size: 1.5rem; 
+   
 }
 
 .popupcontainer {
@@ -52,10 +72,10 @@
     align-items: center; 
     height: 2rem; 
     padding: 0.5em 1em;
-    margin-bottom: 1em;
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
     font-size: .8rem;
+    
 }
 
 .popup {
@@ -118,6 +138,7 @@
     margin-top: 1.5rem;
 }
 
+
 .disclaimer{
     max-width: 70%;
     border: 2px solid black;
@@ -167,8 +188,15 @@
     margin-bottom: 0.5rem;
     border: 3px solid black;
     border-radius: 10%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+
 }
 
 .pfolcontainer div {
     text-align: center;
 }
+
+.pfolcontainer img:hover{
+    transform: scale(1.01);
+}
+

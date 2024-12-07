@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="headerfooter-style.css">
 </head>
 <body>
+    
+    <div id="progress"></div>
+    <div id="negative"></div>
+    
     <div class="headercontainer">
         <div class="leftgrid">
             <div>EST. 2023</div>
@@ -35,12 +39,13 @@
     </div>
 
     
-       
+<img id="logohb" src="images/whitelogo.png" alt="White Logo">
+
 
 <div class="logincont">
     <form action="/login" method="POST">
         <h1>LOGIN</h1>
-        <img id="logohb" src="images/whitelogo.png" alt="White Logo">
+        <br>
         <label for="Email">Username or Email:</label>
         <input type="text" id="Email" name="Email"required />
         <br>
@@ -78,6 +83,22 @@
         this.style.color = 'white'; 
         
         });
+
+        
+        function scroll()
+        {
+            let progress = document.getElementById("progress");
+            let docHeight = document.documentElement.scrollHeight;
+            let vpHeight = window.innerHeight;
+
+            let percentage = (scrollY / (docHeight - vpHeight)) * 100;
+            progress.style.width = percentage + "%"
+        }
+        
+        window.onscroll = scroll;
+
+        window.onload = scroll;
+        
     </script>
 </body>
 </html>
