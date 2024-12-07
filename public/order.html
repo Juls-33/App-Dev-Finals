@@ -59,7 +59,7 @@
 
     <!-- John's Edits -->
 
-    <form id="order-form" action="/upload" method="POST" >
+    <form id="order-form" action="/upload" method="POST" enctype="multipart/form-data" >
 
         <fieldset id="details-container">
 
@@ -172,7 +172,7 @@
 
         </div>
 
-        <input type="submit" id="submit" value="submit">
+        <input type="submit" id="submit" value="Submit">
 
     </form>
 
@@ -257,46 +257,45 @@
 
         let id = null;
 
-        form.addEventListener("submit", (event) =>
-        {
-            event.preventDefault();
-            form.submit();
-            received.style.display = "none";
-            message.style.display = "none";
+        // form.addEventListener("submit", (event) =>
+        // {
+        //     event.preventDefault();
+        //     received.style.display = "none";
+        //     message.style.display = "none";
 
-            success.style.display = "flex";
-            loadingBar.style.display = "flex";
+        //     success.style.display = "flex";
+        //     loadingBar.style.display = "flex";
 
-            if(id !== null)
-            {
-                clearInterval(id);
-                id = null;
-            }
+        //     if(id !== null)
+        //     {
+        //         clearInterval(id);
+        //         id = null;
+        //     }
 
-            let width = 0;
-            loadingBar.style.width = width + "%";
+        //     let width = 0;
+        //     loadingBar.style.width = width + "%";
             
-            id = setInterval(loadingAnimation, 20);
+        //     id = setInterval(loadingAnimation, 20);
 
-            function loadingAnimation()
-            {
-                loadingPrompt.innerHTML = width + "%";
-                if(width >= 100)
-                {
-                    clearInterval(id)
-                    id = null;
-                    success.style.display = "flex";
-                    loadingPrompt.innerHTML = "Processing Complete!";
-                    received.style.display = "block";
-                    message.style.display = "block";
-                }
-                else
-                {
-                    width++;
-                    loadingBar.style.width = width + "%";
-                }
-            }
-        });
+        //     function loadingAnimation()
+        //     {
+        //         loadingPrompt.innerHTML = width + "%";
+        //         if(width >= 100)
+        //         {
+        //             clearInterval(id)
+        //             id = null;
+        //             success.style.display = "flex";
+        //             loadingPrompt.innerHTML = "Processing Complete!";
+        //             received.style.display = "block";
+        //             message.style.display = "block";
+        //         }
+        //         else
+        //         {
+        //             width++;
+        //             loadingBar.style.width = width + "%";
+        //         }
+        //     }
+        // });
 
     </script>
 </body>

@@ -4,10 +4,13 @@ const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const multer = require('multer');
-const { google } = require('googleapis');
+// const streamifier = require('streamifier');
+// const { google } = require('googleapis');
+const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const { Stream } = require('stream');
 
 const app = express();
 const port = 3000;
@@ -28,18 +31,64 @@ const uri = "mongodb+srv://tiyarjiz:tiyarjiz@cluster0.8qeah.mongodb.net/tiyarjiz
 mongoose.connect(uri).then(() => console.log('Connected to MongoDB')).catch(err => console.error('Could not connect to MongoDB', err));
 
 // multer for file uploads
-const storage = multer.memoryStorage();
-const upload = multer({storage: storage});
-
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/"); // Specify the upload folder
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + "-" + file.originalname); // Generate unique file name
+  },
+});
+const upload = multer({ storage: storage });
 //google drive api
+/*
 const CLIENT_ID= "82931729345-03e5gn9ag24tqb83865v2h71r08rh09g.apps.googleusercontent.com";
 const CLIENT_SECRET = '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';
-const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
+const REDIRECT_URI = 'http://localhost';
 const REFRESH_TOKEN = "https://oauth2.googleapis.com/token";
-const oauth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, REFRESH_TOKEN);
+const oauth2Client = new google.auth.OAuth2('82931729345-03e5gn9ag24tqb83865v2h71r08rh09g.apps.googleusercontent.com', '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', 'http://localhost:3000/oauth2callback');
 oauth2Client.setCredentials({refresh_token: REFRESH_TOKEN});
-const drive = google.drive({version: 'v3', auth: oauth2Client})
+const authUrl = oauth2Client.generateAuthUrl({
+  access_type: 'offline',
+  scope: ['https://www.googleapis.com/auth/drive'],
+  prompt: 'consent',
+});*/
+/*
+const credentials = JSON.parse(fs.readFileSync('credentials.json'));
+const { client_id, client_secret, redirect_uris } = credentials.web;
+const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
 
+app.get('/auth', (req, res) => {
+  const authUrl = oAuth2Client.generateAuthUrl({
+    access_type: 'offline',
+    scope: ['https://www.googleapis.com/auth/drive.file'],
+  });
+  res.redirect(authUrl);
+});
+
+app.get('/auth/callback', async (req, res) => {
+  const code = req.query.code;
+  const { tokens } = await oAuth2Client.getToken(code);
+  oAuth2Client.setCredentials(tokens);
+
+  // Save tokens to use later
+  fs.writeFileSync('tokens.json', JSON.stringify(tokens));
+  res.send('Authentication successful! You can now upload files.');
+});
+if (fs.existsSync('tokens.json')) {
+  const tokens = JSON.parse(fs.readFileSync('tokens.json'));
+  oAuth2Client.setCredentials(tokens);
+}
+
+// const drive = google.drive({version: 'v3', auth: oauth2Client})
+// oauth2Client.refreshAccessToken((err, tokens) => { 
+//   if (err) { 
+//     console.error('Error refreshing access token:', err); 
+//     return; 
+//   } 
+//   console.log('Access token refreshed:', tokens); });
+*/
 //schema models
 const dataScheme = new mongoose.Schema({
   first_name: String,
@@ -58,7 +107,11 @@ const userInquirySchema = new mongoose.mongoose.Schema({
 });
 const orderSchema = new mongoose.Schema({
   size: String,
-  image: String,
+  photo:{
+    filename: String,
+    filepath: String,
+    uploadedAt: { type: Date, default: Date.now },
+  },
   notes1: String,
   first_name: String,
   last_name: String,
@@ -67,7 +120,11 @@ const orderSchema = new mongoose.Schema({
   mobile_number: String,
   address: String,
   notes2: String,
-  payment_number: String,
+  proof:{
+    filename: String,
+    filepath: String,
+    uploadedAt: { type: Date, default: Date.now },
+  },
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'userData'}
 })
 
@@ -77,7 +134,7 @@ const inquiryCollection = 'inquiries'
 const orderCollection = 'orders'
 const userData = mongoose.model('userData', dataScheme, collection);
 const inquiriesData = mongoose.model('inquiriesData', userInquirySchema, inquiryCollection);
-const orderData = mongoose.model('orderData', orderSchema, inquiryCollection);
+const orderData = mongoose.model('orderData', orderSchema, orderCollection);
 module.exports = { userData, inquiriesData, orderCollection};
 
 
@@ -134,45 +191,26 @@ app.get('/:username', (req, res)=>{
 
 //POST (Getting information from website)
 //Handle file upload 
-app.post('/upload', upload.fields([{ name: 'photo', maxCount: 1 }, { name: 'proof', maxCount: 1 }]), async (req, res) =>{
+app.post('/upload', upload.fields([{ name: "photo", maxCount: 1 }, { name: "proof", maxCount: 1 },]), async (req, res) =>{
+  console.log("PASOK!!");
   const { sizes, notes1, fname, lname, email, instagram, number, address, notes2} = req.body;
   console.log(req.body);
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.session.user){
+    console.log("image");
     try{
-      const photoFile = req.files['photo'][0];
-      const proofFile = req.files['proof'][0];
-      const uploadToDrive = async (pic) =>{
-        const {buffer, originalName, mimeType }= pic;
-        const response = await drive.files.create({
-          requestBody:{
-            name: originalName,
-            mimeType: mimeType,
-          },
-          media:{
-            mimeType: mimeType,
-            body: Buffer.from(buffer),
-          },
-        });
-        const fileId = response.data.id;
-        await drive.permissions.create({
-          fileId: fileId,
-          requestBody:{
-            role:'reader',
-            type:'anyone',
-          },
-        });
-        return `https://drive.google.com/uc?id=${fileId}`;
-      };
-
-      const photoLink = await uploadToDrive(photoFile);
-      const proofLink = await uploadToDrive(proofFile);
-      
+      if (!req.files.photo || !req.files.proof) {
+        return res.status(400).send("Both 'photo' and 'proof' are required!");
+      }
+      //save to mongodb
       const newOrder = new orderData({
         size: sizes,
-        image: photoLink,
+        photo: {
+          filename: req.files.photo[0].originalname,
+          filepath: req.files.photo[0].path,
+        },
         notes1: notes1,
         first_name: fname,
         last_name: lname,
@@ -181,7 +219,10 @@ app.post('/upload', upload.fields([{ name: 'photo', maxCount: 1 }, { name: 'proo
         mobile_number: number,
         address: address,
         notes2: notes2,
-        payment_number: proofLink,
+        proof: {
+          filename: req.files.proof[0].originalname,
+          filepath: req.files.proof[0].path,
+        },
         user: req.session.user._id,
       });
       await newOrder.save();
@@ -191,9 +232,10 @@ app.post('/upload', upload.fields([{ name: 'photo', maxCount: 1 }, { name: 'proo
         { $push: { orders: newOrder._id } 
       });
       console.log('Image uploaded successfully');
+      res.redirect("back");
     }
     catch(err){
-      console.log(error);
+      console.log("engkkkk" + err);
     } 
   }
   else{
