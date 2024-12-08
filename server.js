@@ -57,6 +57,8 @@ const userInquirySchema = new mongoose.mongoose.Schema({
 });
 const orderSchema = new mongoose.Schema({
   size: String,
+  quantity: String,
+  price: String,
   photo:{
     filename: String,
     filepath: String,
@@ -161,8 +163,9 @@ app.get('/:username', (req, res)=>{
 //Handle file upload 
 app.post('/upload', upload.fields([{ name: "photo", maxCount: 1 }, { name: "proof", maxCount: 1 },]), async (req, res) =>{
   console.log("PASOK!!");
-  const { sizes, notes1, fname, lname, email, instagram, number, address, notes2} = req.body;
+  const { height, width, quantity, amountPrice, notes1, fname, lname, email, instagram, number, address, notes2} = req.body;
   console.log(req.body);
+  const size = `${height} x ${width}`;
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -174,7 +177,9 @@ app.post('/upload', upload.fields([{ name: "photo", maxCount: 1 }, { name: "proo
       }
       //save to mongodb
       const newOrder = new orderData({
-        size: sizes,
+        size: size,
+        quantity: quantity,
+        price:amountPrice,
         photo: {
           filename: req.files.photo[0].originalname,
           filepath: `uploads/${req.files.photo[0].filename}`,
