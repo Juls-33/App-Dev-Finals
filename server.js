@@ -1,3 +1,5 @@
+// Code structure or syntax was taken from mongodb api, github api, w3school, geekforgeeks, stackoverflow, chatgpt, and microsoft copilot
+// Node.js with express was learned via youtube, w3school, and chatgpt. Lessons from OOP and DSA was used in server.js
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
@@ -142,6 +144,20 @@ app.get("/user-orders", async (req, res) => {
     res.status(500).json({error: "An error occurred while fetching the orders"});
   }
 });
+app.get("/admin-orders", async (req, res) => {
+  try {
+    const orders = await orderData.find().populate("user", "first_name last_name email");
+
+    if (!orders || orders.length === 0) {
+      return res.status(404).json({ message: "No orders found" });
+    }
+
+    res.json(orders); 
+  } catch (err) {
+    console.error("Error fetching orders:", err);
+    res.status(500).json({ error: "An error occurred while fetching orders" });
+  }
+})
 // Serve the login page
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -222,18 +238,27 @@ app.post('/login', async (req, res) => {
   try{
     const user = await userData.findOne({username: Email})
     console.log(user);
-    console.log(Email == user.username);
-    console.log(Password == user.password);
     
-    if (Email == user.username && Password == user.password) {
-      req.session.user = user;
-      res.redirect(`/${Email}`);
-    } else if (Email === 'admin' && Password === 'adminpass') {
-      req.session.user = 'admin';
-      res.redirect('/admin');
-    } else {
-      res.send('Invalid credentials');
+    if (user == null){
+      if (Email === 'admin' && Password === 'adminpass') {
+        req.session.user = 'admin';
+        res.redirect('/admin');
+      } else {
+        res.send('Invalid credentials');
+      }
     }
+    else{
+      console.log(Email == user.username);
+      console.log(Password == user.password);
+      if (Email === user.username && Password === user.password) {
+        req.session.user = user;
+        res.redirect(`/${Email}`);
+      }
+      else {
+        res.send('Invalid credentials');
+      }
+    }
+     
   }catch (e){
     console.log(e);
   }

@@ -299,6 +299,7 @@
             let calculatedQuantity = calculatedSize * quantityValue;
 
             priceQuantity.innerHTML = "Price: PHP " + calculatedQuantity.toFixed(2);
+            document.getElementById("amountPrice").value = calculatedQuantity.toFixed(2);
         }
 
         height.addEventListener("keyup", updatePrice);

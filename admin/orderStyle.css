@@ -1,22 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Combo&family=Single+Day&display=swap');
+
+*,
+html {
+    
+    font-family: 'Poppins', sans-serif;
+}
+:root{
+    --dropShadow: 5px 10px #dadada60;
+}
+
 body{
     padding: 0;
     border: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 .container{
-    background-color: pink;
+    background-color: #ffffff;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 0;
 }
 .top-panel{
-    background-color: black;
+    background-color: #000927;
     width: 100vw;
     height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .side-panel{
-    background-color: aqua;
+    background-color: #001149 ;
+    
     width: 15%;
     height: 90vh;
 }
@@ -26,13 +44,17 @@ body{
     justify-content: center;
     align-items: center;
     text-align: center;
+    color: white;
+    text-decoration: none;
 }
 .side-buttons.active{
-    background-color: aquamarine;
+    background-color: #001C79;
+    color: white;
+    text-decoration: none;
 }
 
 .main-panel{
-    background-color: bisque;
+    background-color: #F1F3F2;
     display: flex;
     flex-wrap: wrap;
     width: 85%;
@@ -40,36 +62,50 @@ body{
     justify-content: space-evenly;
 }
 .order-preview{
-    background-color: blueviolet;
+    background-color: white;
     width: 28%;
     margin: 0.5rem 0 ;
+    max-height: 88vh;
+    border-radius: 10px;
+    box-shadow: var(--dropShadow);
 }
+
 .order-preview-header{
-    background-color: cadetblue;
+    background-color: white;
     display: flex;
     flex-wrap: wrap;
+    border-radius: 10px;
 }
 
 #order-container{
     width: 65%;
-    background-color: brown;
-    margin: 0.5rem 0    ;
+    background-color: white;
+    margin: 0.5rem 0;
     padding: 1rem;
+    border-radius: 10px;
+    box-shadow: var(--dropShadow);
+    height: 84.5vh;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 .order-status, .order-title{
     height: 33%;
-    margin: 0.2rem 0;
+    margin: 0.5rem;
     padding: 0 0.2rem;
-    width: 100%;
-    background-color:azure ;
+    width: 90%;
+    background-color:white ;
 }
 .order-title{
-    background-color: aliceblue;
+    background-color: #f6f6f6;
     text-align: center;
     
 }
 .order-scroll{
-    border-bottom: 2px gray solid;
+    /* border-bottom: 2px gray solid; */
+    word-wrap: break-word;
+    max-height: 70vh;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 .order-id-tab{
     margin: 1rem 0 0 1rem;
@@ -81,32 +117,50 @@ body{
 .img-container{
     width: 50%;
     padding-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .img-container .image{
     width:100%;
     height: 100%;
     object-fit: contain;
 }
+.order-details{
+    width: 50%;
+}
 
 
 /* main content */
 .container-details, .container-2, .container-upload, .container-buttons{
-    background-color: aquamarine;
+    background-color: white;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    /* padding: 1rem; */
+    height: auto;
+}
+.container-2{
+    height: 40vh
+}
+#main-container{
+    background-color: blueviolet;
+    height: 95%;
+    background-color: white;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 .container-details span{
     display: inline-block;
     width: 25%;
-    background-color: blue;
+    background-color: white;
     margin: 0 1rem;
 }
 .container-details div{
     width: 100%;
-    background-color: aqua;
+    /* background-color: aqua; */
     margin: 0.5rem 1rem;
 }
 
@@ -121,25 +175,31 @@ body{
     height: 2rem;
 }
 .image-container{
-    background-color: aqua;
     width: 100%;
     max-height: 200px;
-    /* padding-bottom: 60%; */
+    margin-bottom: 1rem;
+    background-color: var(--dropShadow);
 }
 .image-container img{
     width:100%;
     height: 100%;
     object-fit: contain;
+    box-shadow: var(--dropShadow);
 }
 .container-notes{
     width: 40%;
-    background-color: rgb(91, 201, 165);
+    background-color: white ;
     margin: 1rem;
 }
 .customer-notes{
     margin: 1rem 0;
-    background-color: white;
-    width: 100%;
+    /* background-color: ; */
+    border: solid #838181 2px;
+    border-radius: 10px;
+    width: 90%;
+    height: 80%;
+    padding: 1rem;
+    box-shadow: var(--dropShadow);
 }
 
 .container-upload div{
@@ -147,7 +207,7 @@ body{
     margin: 0.5rem 1rem;
 }
 .container-upload span:nth-child(2){
-    background-color: blue;
+    background-color: white;
     margin-left: 1rem;
     width: 30%;
 }
@@ -155,7 +215,7 @@ body{
     display: inline-flex;
     flex-wrap: wrap;
     width: 30%;
-    background-color: blue;
+    background-color: white;
 }
 input{
     width: 90%;
@@ -164,7 +224,7 @@ input{
     display: inline-flex;
     flex-wrap:wrap;
     width: 25%;
-    background-color: BLUE;
+    background-color: WHITE;
 }
 .container-buttons{
     justify-content: space-around;
@@ -172,4 +232,46 @@ input{
 }
 .container-buttons button{
     width: 8rem;
+}
+.active-order {
+    background-color: #f6f6f6;
+    border-left: 5px solid #001c79;
+}
+
+/* icons and buttons */
+
+.icon {
+    width: 2em;
+    margin: 0.5rem
+}
+.logo-container{
+    height: 80%;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+#tiyarjiz{
+    /* width: 100%; */
+    height: 80%;
+}
+#profile{
+    height: 40%;
+    margin: 1rem;
+}
+
+#cancel-order{
+    background-color: #fb5757;
+    border-radius: 10px;
+    border: 1px solid #fb5757;
+    padding: 1rem;
+    font-weight: 600;
+    color: white;
+}
+#complete-order{
+    background-color: #001457;
+    border-radius: 10px;
+    border: 1px solid #001457;
+    padding: 1rem;
+    font-weight: 600;
+    color: white;
 }

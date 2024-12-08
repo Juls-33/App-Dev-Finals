@@ -9,12 +9,12 @@
 <body>
     <div class="container">
         <div class="top-panel">
-            <button id="create">click me</button>
+            <span class="logo-container"><img src="images/whitelogo.png" alt="Tiyarjiz" id="tiyarjiz"> Admin Page</span>
+            <span class="logo-container"><a href="index.html" class="logo-container">Logout <img src="images/profile.png" alt="profile" id="profile"></a></span>
         </div>
         <div class="side-panel" >
-            <a href="adminHome.html"><div class="side-buttons">Dashboard</div></a>
-            <a href="adminOrders.html"><div class="side-buttons active">Orders</div></a>
-            <!-- <div class="side-buttons">Message</div> -->
+            <a href="adminHome.html"><div class="side-buttons"><img src="images/dashboard.png" alt="DASHBOARD" class="icon"> Dashboard</div></a>
+            <a href="adminOrders.html"><div class="side-buttons active"><img src="images/cart.png" alt="DASHBOARD" class="icon"> Orders</div></a>
         </div>
         <div class="main-panel">
             <div class="order-preview">
@@ -23,71 +23,127 @@
                     <div class="order-status">Completed Orders: 0</div>
                     <div class="order-title">Orders</div>
                 </div>
-                <!-- <div class="order-scroll">
-                    <div class="order-id-tab">Order#123456</div>
-                    <div class="order-id-content">
-                        <div class="img-container"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/LeBron_James_%2851959977144%29_%28cropped2%29.jpg/800px-LeBron_James_%2851959977144%29_%28cropped2%29.jpg" alt="" width="100%"></div>
-                        <div class="order-details">
-                            hehdshshd
-                            dsdasda
-                            
-                        </div>
-                    </div>
-                </div> -->
+                <div class="order-scroll"></div>
             </div>
-            <div id="order-container">
-                <!-- <div class="container-details">
-                    <span>ORDER #123456</span>
-                    <span>Status</span>
-                    <span>Size 14x7 inches</span>
-                    <div>Name:</div>
-                    <div>Instagram Username</div>
-                    <div>Mobile Number</div>
-                    <div>Address</div>
-                </div>
-                <div class="container-2">
-                    <div class="container-picture">
-                        <div class="image-container">
-                            <img src="sched.png" alt="" id="image">
-                        </div>
-                        <button>Download Image</button>
-                    </div>
-                    <div class="container-notes">
-                        Notes:
-                        <div class="customer-notes">
-                            hello worlddddd
-                            hello worlddddd hello worlddddd<br>hello worlddddd<br>hello worlddddd<br>hello worlddddd<br>
-                        </div>
-                    </div>
-                </div>
-                <form action="">
-                    <div class="container-upload">
-                        <div>Upload delivery tracking number</div>
-                        <span>
-                            <input type="file" name="tracking" id="tracking">
-                        </span>
-                        or
-                        <span>Tracking Number:
-                            <input type="text">
-                        </span>
-                        <span>
-                           Delivery Courier:
-                            <select name="delivery" id="delivery">
-                                <option value="lalamove">Lalamove</option>
-                                <option value="grab">Grab</option>
-                                <option value="lbc">LBC</option>
-                            </select>
-                        </span>
-                    </div>
-                    <div class="container-buttons">
-                        <button class="cancel-order">Cancel Order</button>
-                        <button class="complete-order">Complete Order</button>
-                    </div>
-                </form> -->
-                
-            </div>
+            <div id="order-container"></div>
         </div>
     </div>
-    <script src="adminOrder.js"></script>
+    <script>
+
+        async function fetchAllOrders() {
+            const mainPanel = document.getElementById('order-container');
+            const sideTab = document.querySelector('.order-scroll');
+            try {
+                const response = await fetch("/admin-orders"); // Backend endpoint
+                if (!response.ok) throw new Error("Failed to fetch orders");
+
+                const orders = await response.json();
+
+                
+
+                if (orders.length === 0) {
+                mainPanel.innerHTML = "<p>No orders found.</p>";
+                return;
+                }
+
+                // Render orders
+                const ordersHTML = orders.map(order => {
+                return `
+                <div class="each-order" data-order-id="${order._id}">
+                    <div class="order-id-tab"><strong>Order# ${order._id}</strong></div>
+                    <div class="order-id-content">
+                        <div class="img-container"><img src="${order.photo.filepath}" alt="" width="100%"></div>
+                            <div class="order-details">
+                                <strong>Date Ordered:</strong>
+                                ${new Date(order.createdAt).toLocaleString()}<br>
+                                <strong>Price:</strong> ${order.price}<br>
+                                <strong>Status:</strong> Pending
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                `;
+                }).join("");
+
+                sideTab.innerHTML = ordersHTML;
+
+                const eachOrders = document.querySelectorAll('.each-order');
+                eachOrders.forEach(eachOrder => {
+                    eachOrder.addEventListener('click', () => {
+                        const orderId = eachOrder.getAttribute('data-order-id');
+                        eachOrders.forEach(eachOrder => eachOrder.classList.remove('active-order'));
+                        eachOrder.classList.add('active-order');
+                        showOrderDetails(orderId, orders);
+                    })
+                })
+            } catch (err) {
+                console.error("Error fetching orders:", err);
+                mainPanel.innerHTML = "<p>Error loading orders. Please try again later.</p>";
+            }
+        }
+        function showOrderDetails(orderId, orders){
+            const mainPanel = document.getElementById('order-container');
+            const selectedOrder = orders.find(order => order._id === orderId);
+            if (selectedOrder) {
+                mainPanel.innerHTML = `
+                    <div id="main-container">
+                    <div class="container-details">
+                        <span><strong>ORDER # </strong>${selectedOrder._id}</span>
+                        <span><strong>Status: </strong> Pending</span>
+                        <span><strong>Size:</strong> ${selectedOrder.size}</span>
+                        <div><strong>Name:</strong> ${selectedOrder.first_name} ${selectedOrder.last_name}</div>
+                        <div><strong>Instagram Username:</strong> ${selectedOrder.ig_username}</div>
+                        <div><strong>Mobile Number:</strong> ${selectedOrder.mobile_number}</div>
+                        <div><strong>Address:</strong> ${selectedOrder.address}</div>
+                        <div><strong>Price:</strong> ${selectedOrder.price}</div>
+                    </div>
+                    <div class="container-2">
+                        <div class="container-picture">
+                            <div class="image-container">
+                                <img src="${selectedOrder.photo.filepath}" alt="Order Image">
+                            </div>
+                            <button>Download Image</button>
+                        </div>
+                        <div class="container-notes">
+                            <strong>Notes:</strong>
+                            <div class="customer-notes">${selectedOrder.notes1 || "No notes provided."}</div>
+                        </div>
+                    </div>
+                    <form action="">
+                        <div class="container-upload">
+                            <div>Upload delivery tracking number</div>
+                            <span>
+                                <input type="file" name="tracking" id="tracking">
+                            </span>
+                            or
+                            <span>Tracking Number:
+                                <input type="text">
+                            </span>
+                            <span>
+                            Delivery Courier:
+                                <select name="delivery" id="delivery">
+                                    <option value="lalamove">Lalamove</option>
+                                    <option value="grab">Grab</option>
+                                    <option value="lbc">LBC</option>
+                                </select>
+                            </span>
+                        </div>
+                        <div class="container-buttons">
+                            <button id="cancel-order">Cancel Order</button>
+                            <button id="complete-order">Complete Order</button>
+                        </div>
+                    </form>
+                    </div>
+                `;
+            } else {
+                mainPanel.innerHTML = "<p>Order details not found.</p>";
+            }
+        }
+
+
+        fetchAllOrders();
+
+    </script>
 </body>
 </html>
