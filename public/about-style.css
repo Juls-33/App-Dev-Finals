@@ -286,15 +286,15 @@
     }
 }
 
-#progress {
+#progress
+{
     background-color: darkblue;
     position: sticky;
     height: 10px;
     top: 0;
     left: 0;
-    z-index: 2;
+    z-index: 1000;
 }
-
 
 #negative
 {
@@ -309,5 +309,3 @@
 }
 
 /* John's Edits */
-
-@
