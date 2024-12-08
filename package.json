@@ -1,11 +1,16 @@
 {
   "dependencies": {
+    "@octokit/rest": "^21.0.2",
+    "axios": "^1.7.9",
     "cors": "^2.8.5",
-    "express": "^4.21.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
     "express-session": "^1.18.1",
     "googleapis": "^144.0.0",
+    "mongodb": "^6.11.0",
     "mongoose": "^8.8.3",
     "multer": "^1.4.5-lts.1",
+    "octokit": "^4.0.2",
     "streamifier": "^0.1.1"
   },
   "name": "backend-testing",

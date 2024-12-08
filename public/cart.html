@@ -61,6 +61,10 @@
     <div class="order1">
         <p>Order # 0123</p>
         <p>Order Placed on October 18, 2024 6:14 PM.</p>
+        <div class="img-container">
+            <h4>Photo:</h4>
+            <img src="images/1.PNG" alt="Photo">
+        </div>
         <p><u>View Order Details.</u></p>
     </div>
 
@@ -106,6 +110,41 @@
         this.style.color = 'white'; 
         
         });
+        async function fetchOrders(){
+            try{
+                const orderContainer = document.getElementsByClassName("ordercont");
+                const response = await fetch("/user-orders");
+                if (!response) throw new Error("Unable to fetch orders");
+
+                const orders = await response.json();
+                if(orders.length === 0){
+                   orderContainer[0].innerHTML = "<p> You have no orders yet. </p>";
+                    return;
+                }
+                const ordersHTML = orders.map(order => {    
+                    console.log(order.photo.filepath);
+                    return `
+                    <div class="order1">
+                        <p>Order # ${order._id}</p>
+                        <p>Order Placed on ${new Date(order.createdAt).toLocaleString()}</p>
+                        <div class="img-container"> 
+                            <h4>Photo:</h4>
+                            <img src="/${order.photo.filepath}" alt="Photo">
+                        </div>
+                        <p><u>View Order Details.</u></p>
+                    </div>
+                    `
+                }).join("");
+                orderContainer[0].innerHTML = ordersHTML;
+            }
+            catch (err){
+                console.log("Error fetching user orders:", err );
+                orderContainer[0].innerHTML = `<p> An errro occured while fetching the orders.</p>`
+            }
+           
+            
+        }
+        fetchOrders();
 
         
         function scroll()
