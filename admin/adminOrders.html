@@ -38,9 +38,6 @@
                 if (!response.ok) throw new Error("Failed to fetch orders");
 
                 const orders = await response.json();
-
-                
-
                 if (orders.length === 0) {
                 mainPanel.innerHTML = "<p>No orders found.</p>";
                 return;

@@ -8,26 +8,91 @@
 </head>
 <body>
     <div class="container">
-        <div class="top-panel"></div>
+        <div class="top-panel">
+            <span class="logo-container"><img src="images/whitelogo.png" alt="Tiyarjiz" id="tiyarjiz"> Admin Page</span>
+            <span class="logo-container"><a href="index.html" class="logo-container">Logout <img src="images/profile.png" alt="profile" id="profile"></a></span>
+        </div>
         <div class="side-panel" >
-            <a href="adminHome.html"><div class="side-buttons active">Dashboard</div></a>
-            <a href="adminOrders.html"><div class="side-buttons">Orders</div></a>
-            <!-- <div class="side-buttons">Message</div> -->
+            <a href="adminHome.html"><div class="side-buttons active"><img src="images/dashboard.png" alt="DASHBOARD" class="icon"> Dashboard</div></a>
+            <a href="adminOrders.html"><div class="side-buttons"><img src="images/cart.png" alt="DASHBOARD" class="icon"> Orders</div></a>
         </div>
         <div class="main-panel">
             <div class="title-text">Dashboard</div>
             <div class="top-container" onWheel= "this.scrollLeft+=event.deltaY>0?100:-100">
-                <div class="small-cards">Total Earnings</div>
-                <div class="small-cards">Monthly Earnings</div>
-                <div class="small-cards">Completed Orders</div>
-                <div class="small-cards">Pending Orders</div>
+                <div class="small-cards">
+                    <span class="small-card-title">Total Earnings</span>
+                    <span class="small-card-contents">Php 0</span>
+                    <span class="small-card-icon"><img src="images/money.png" alt="money"></span>
+                </div>
+                <div class="small-cards">
+                    <span class="small-card-title">Monthly Earnings</span>
+                    <span class="small-card-contents">Php 50000</span>
+                    <span class="small-card-icon"><img src="images/money.png" alt="money"></span>
+                </div>
+                <div class="small-cards">
+                    <span class="small-card-title">Completed Orders</span>
+                    <span class="small-card-contents">0 orders</span>
+                    <span class="small-card-icon"><img src="images/completedOrder.png" alt="cart"></span>
+                </div>
+                <div class="small-cards">
+                    <span class="small-card-title">Pending Orders</span>
+                    <span class="small-card-contents">0 orders</span>
+                    <span class="small-card-icon"><img src="images/cart2.png" alt="cart"></span>
+                </div>
             </div>
-            <div class="big-card">Priority Orders</div>
+            <div class="big-card">
+                <span class="big-card-title">Priority Orders <a href="adminOrders.html"><button>VIEW ALL ORDERS</button></a></span>
+                <span class="big-card-orders">
+                    
+                </span>
+            </div>
             <div class="bottom-container" onWheel= "this.scrollLeft+=event.deltaY>0?100:-100" >
                 <div class="message-card">Message From Customers</div>
                 <div class="most-ordered">Most Ordered Size</div>
             </div>
         </div>
     </div>
+    <script>
+         async function fetchAllOrders() {
+            const bigCardOrders = document.getElementsByClassName('big-card-orders');
+            // const sideTab = document.querySelector('.order-scroll');
+            try {
+                const response = await fetch("/admin-orders"); // Backend endpoint
+                if (!response.ok) throw new Error("Failed to fetch orders");
+
+                const orders = await response.json();
+
+                if (orders.length === 0) {
+                bigCardOrders.innerHTML = "<p>No orders found.</p>";
+                return;
+                }
+                let pendingOrders = 0;
+                for (let i=0; i<orders.length; i++){
+                    pendingOrders++;
+                }
+                document.getElementsByClassName('small-card-contents')[3].innerHTML = `${pendingOrders} orders`;
+                // Render orders
+                const ordersHTML = orders.map(order => {
+                return `
+                    <div class="eachOrder-container">
+                        <span class="eachOrder-text">
+                            Order #${order._id} <br><br>
+                            Size ${order.size}
+                        </span>
+                        <span class="eachOrder-img-container">
+                            <img src="${order.photo.filepath}" alt="image" width=100px>
+                        </span>
+                    </div>
+                `;
+                }).join("");
+
+                bigCardOrders[0].innerHTML = ordersHTML;
+            } catch (err) {
+                console.error("Error fetching orders:", err);
+                mainPanel.innerHTML = "<p>Error loading orders. Please try again later.</p>";
+            }
+        }
+        fetchAllOrders();
+    </script>
 </body>
 </html>

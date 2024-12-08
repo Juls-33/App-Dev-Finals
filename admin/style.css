@@ -1,22 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Combo&family=Single+Day&display=swap');
+
+*,
+html {
+    
+    font-family: 'Poppins', sans-serif;
+}
 body{
     padding: 0;
     border: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 .container{
-    background-color: pink;
+    background-color: #ffffff;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 0;
 }
 .top-panel{
-    background-color: black;
+    background-color: #000927;
     width: 100vw;
     height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .side-panel{
-    background-color: aqua;
+    background-color: #001149 ;
     width: 15%;
     height: 90vh;
 }
@@ -26,13 +39,18 @@ body{
     justify-content: center;
     align-items: center;
     text-align: center;
+    color: white;
+    text-decoration: none;
 }
 .side-buttons.active{
-    background-color: aquamarine;
+    background-color: #001C79;
+    color: white;
+    text-decoration: none;
 }
 
+
 .main-panel{
-    background-color: bisque;
+    background-color: #f1f3f2;
     display: flex;
     flex-wrap: wrap;
     width: 85%;
@@ -41,7 +59,8 @@ body{
 }
 .title-text{
     width: 95%;
-    /* background-color: aliceblue; */
+    color: #001149;
+    font-weight: 600;
     height: 5%;
     margin: 1rem;
     margin-bottom: -1rem;
@@ -50,9 +69,9 @@ body{
 }
 .top-container, .bottom-container{
     width: 95%;
-    background-color: brown;
+    /* background-color: brown; */
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     height: 20%;
     overflow-x: auto;
@@ -62,30 +81,104 @@ body{
     height: 30%;
 }
 .small-cards{
-    background-color: blueviolet;
-    height: 80%;
-    width: 20%;
+    background-color: white;
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 22%;
     margin: 1rem;
     min-width: 130px;
+    border-radius: 10px;
+}
+.small-card-title{
+    display: inline-block;
+    width: 100%;
+    font-weight: 600;
+    color: #001457;
+    padding: 0.5rem;
+}
+.small-card-contents{
+    width:40%;
+    padding: 1rem;
+}
+.small-card-icon{
+    width: 30%;
+    padding: 0.5rem;
+}
+.small-card-icon img{
+    width: 100%;
 }
 .big-card{
     width: 95%;
-    background-color: aqua;
+    background-color: white;
     height: 30%;
+    border-radius: 10px;
+}
+.big-card-title{
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 1rem 0rem 1rem;
+    font-weight: 600;
+    color: #001457;
+}
+.big-card-orders{
+    display: flex;
+    width: 95%;
+    height: 70%;
+    margin: 1rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.eachOrder-container{
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin:  0 1rem;
+    width: 27%;
+    height: 100%;
+}
+.eachOrder-img-container{
+    display: flex;
+    justify-content: center;
+    width: 38%;
+    padding: 0 0.5rem;
+}
+.eachOrder-img-container img{
+    width: 100%;
+    object-fit: contain;
+}
+.eachOrder-text{
+    display: block;
+    flex-wrap: wrap;
+    width: 40%;
+    padding: 0 0.5rem;
+    word-break: break-all;
+    overflow-y: auto;
+    height: 95%;
+    margin: 0.5rem;
 }
 .message-card{
     background-color: chocolate;
-    width: 65%;
-    height: 80%;
+    width: 68%;
+    height: 100%;
     min-width: 430px;
-    margin: 1rem;
+    margin: 1rem 0rem;
+    border-radius: 10px;
+    /* padding: 0.5rem; */
 }
 .most-ordered{
     background-color: coral;
-    width: 25%;
-    height: 80%;
+    width: 27%;
+    height: 100%;
     min-width: 165px;
-    margin: 1rem;
+    margin: 1rem 0;
+    border-radius: 10px;
 }
 
 @media only screen and (max-width: 431px)  {
@@ -165,5 +258,25 @@ body{
         min-width: 165px;
         margin: 1rem;
     }
+}
+
+/* icons and buttons */
+.icon {
+    width: 2em;
+    margin: 0.5rem
+}
+.logo-container{
+    height: 80%;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+#tiyarjiz{
+    /* width: 100%; */
+    height: 80%;
+}
+#profile{
+    height: 40%;
+    margin: 1rem;
 }
 
