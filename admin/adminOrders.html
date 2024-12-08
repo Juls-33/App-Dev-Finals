@@ -45,7 +45,11 @@
                 mainPanel.innerHTML = "<p>No orders found.</p>";
                 return;
                 }
-
+                let pendingOrders = 0;
+                for (let i=0; i<orders.length; i++){
+                    pendingOrders++;
+                }
+                document.getElementsByClassName('order-status')[0].innerHTML = `Pending Orders: ${pendingOrders}`;
                 // Render orders
                 const ordersHTML = orders.map(order => {
                 return `
