@@ -56,6 +56,7 @@ body{
     width: 85%;
     height: 90vh;
     justify-content: center;
+    overflow-y: scroll;
 }
 .title-text{
     width: 95%;
@@ -78,8 +79,10 @@ body{
     overflow-y: hidden;
 }
 .bottom-container{
-    height: 30%;
+    height: 35%;
+    margin-top: 0.5rem;
 }
+
 .small-cards{
     background-color: white;
     background-color: white;
@@ -123,6 +126,14 @@ body{
     font-weight: 600;
     color: #001457;
 }
+.big-card-title button{
+    background-color: #001c79;
+    color: white;
+    border-radius: 10px;
+    border: white 1px solid;
+    padding: 0.5rem;
+    font-weight: 600;
+}
 .big-card-orders{
     display: flex;
     width: 95%;
@@ -164,13 +175,61 @@ body{
     margin: 0.5rem;
 }
 .message-card{
-    background-color: chocolate;
+    background-color: white;
     width: 68%;
     height: 100%;
     min-width: 430px;
     margin: 1rem 0rem;
     border-radius: 10px;
+    overflow: auto;
     /* padding: 0.5rem; */
+}
+.message-card-title{
+    background-color: #001c79;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    color: white;
+    padding: 0.5rem 0;
+    font-weight: 600;
+    border-radius: 10px 10px 0 0;
+}
+.message-card-title button{
+    background-color: white;
+    color: #001c79;
+    border-radius: 10px;
+    border: white 1px solid;
+    padding: 0.5rem;
+}
+.message-flex-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+.each-message{
+    display: flex;
+    width: 100%;
+    flex-wrap:wrap;
+}
+.each-message-container{
+    width: 100%;
+}
+.each-message-title{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.each-message-title h4, .each-message-title h5{
+    margin: 0.3rem 0.5rem;
+}
+.each-message-preview{
+    padding: 0 1rem;
+    font-size: 0.9rem;
+}
+.each-message-preview h5{
+    margin: 0;
 }
 .most-ordered{
     background-color: coral;

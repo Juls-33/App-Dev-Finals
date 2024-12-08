@@ -47,7 +47,43 @@
                 </span>
             </div>
             <div class="bottom-container" onWheel= "this.scrollLeft+=event.deltaY>0?100:-100" >
-                <div class="message-card">Message From Customers</div>
+                <div class="message-card">
+                    <span class="message-card-title">
+                        <span class="message-flex-container">
+                            Message and Inquiries
+                            <button>Go to Gmail Account</button>
+                        </span>
+                    </span>
+                    <div class="each-message-container">
+                        <span class="each-message">
+                            <span class="each-message-title">
+                                <h4>LeBron James has sent you an inquiry</h4>
+                                <h5>1 week ago</h5>
+                            </span>
+                            <span class="each-message-preview">
+                                Can you make a rug for my precious son Bronny
+                                Can you make a rug for my precious son Bronny
+                                Can you make a rug for my precious son Bronny
+                                Can you make a rug for my precious son Bronny
+                            </span>
+                        </span>
+                        <hr>
+                        <span class="each-message">
+                            <span class="each-message-title">
+                                <h4>LeBron James has sent you an inquiry</h4>
+                                <h5>1 week ago</h5>
+                            </span>
+                            <span class="each-message-preview">
+                                Can you make a rug for my precious son Bronny
+                                Can you make a rug for my precious son Bronny
+                                Can you make a rug for my precious son Bronny
+                                Can you make a rug for my precious son Bronny
+                            </span>
+                        </span>
+                        <hr>
+                        
+                    </div>
+                </div>
                 <div class="most-ordered">Most Ordered Size</div>
             </div>
         </div>
@@ -92,7 +128,42 @@
                 mainPanel.innerHTML = "<p>Error loading orders. Please try again later.</p>";
             }
         }
+        
+        async function fetchAllInquiries(){
+            const eachMessageContainer = document.getElementsByClassName("each-message-container");
+            try{
+                const response = await fetch("/all-user-inquiries");
+                if(!response.ok) throw new Error ("Failed to fetch inquiries");
+
+                const inquiries = await response.json();
+                if (inquiries.length ===0){
+                    eachMessageContainer[0].innerHTML = "<h4>No inquiry at the moment</h4>"
+                    return;
+                }
+                const inquiriesHTML = inquiries.map(inquiry =>{
+                    return`
+                    <span class="each-message">
+                            <span class="each-message-title">
+                                <h4>${inquiry.first_name} ${inquiry.last_name} has sent you an inquiry</h4>
+                                <h5>Recent</h5>
+                            </span>
+                            <span class="each-message-preview">
+                                <h5>${inquiry.email}</h5>
+                                ${inquiry.comments}
+                            </span>
+                        </span>
+                    <hr>
+                    `;
+                }).join("");
+
+                eachMessageContainer[0].innerHTML = inquiriesHTML;
+            }
+            catch(err){
+                console.log(err);
+            }
+        }
         fetchAllOrders();
+        fetchAllInquiries();
     </script>
 </body>
 </html>

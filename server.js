@@ -92,7 +92,7 @@ const orderData = mongoose.model('orderData', orderSchema, orderCollection);
 module.exports = { userData, inquiriesData, orderCollection};
 
 
-//GET (serving pages)
+//GET (serving pages) and serving data from db
 // Fetch user inquiries
 app.get('/user-inquiry', async (req, res) => {
   console.log('Session data:', req.session);
@@ -109,6 +109,17 @@ app.get('/user-inquiry', async (req, res) => {
     }
   } else {
     return res.status(401).json({ error: "Unauthorized: You must be logged in." });
+  }
+});
+app.get('/all-user-inquiries', async (req, res) =>{
+  try{
+    const inquiries = await inquiriesData.find().populate('user', 'first_name last_name email');
+    if (!inquiries || inquiries.length === 0) return res.status(404).json({ message: "No user inquiries" });
+    res.json(inquiries);
+  }
+  catch(err){
+    console.log("Failed to fetch inquiries", err);
+    res.status(500).json({ error:"Failed to fetch inquiries"});
   }
 });
 app.get('/user-data', async (req, res) =>{

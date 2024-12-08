@@ -34,7 +34,7 @@
             const mainPanel = document.getElementById('order-container');
             const sideTab = document.querySelector('.order-scroll');
             try {
-                const response = await fetch("/admin-orders"); // Backend endpoint
+                const response = await fetch("/admin-orders"); 
                 if (!response.ok) throw new Error("Failed to fetch orders");
 
                 const orders = await response.json();
