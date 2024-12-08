@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRG | OrderV2 Page</title>
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+    <link rel="stylesheet" href="headerfooter-style.css">
+    <link rel="stylesheet" href="orderV2.css">
+</head>
+<body>
+
+    <div id="progress"></div>
+    <div id="negative"></div>
+    
+    <div class="headercontainer">
+        
+        <div class="leftgrid">
+            <div>EST. 2023</div>
+            <div>BORN IN QC</div>
+        </div>
+    
+        <div class="center">
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+                &#9776; 
+            </div>
+            <div class="navlinks" id="navlinks">
+                <div><a href="index.html">HOME</a></div>
+                <div><a href="about.html">ABOUT</a></div>
+                <div><a href="portfolio.html">PORTFOLIO</a></div>
+                <div><a href="order.html">ORDER</a></div>
+                <div><a href="contact.html">CONTACT</a></div>
+            </div>
+        </div>
+    
+        <div class="right">
+            <a href="login.html"> <img id="profile" src="images/profile.png" alt="Profile"></a>
+            <a href="cart.html"><img id="cart" src="images/cart.png" alt="Cart"></a>
+        </div>
+    </div>
+
+    <div class="headerbanner">
+        <div class="hbcontents">
+            <img id="hbanner" src="images/hbanner.jpg" alt="Header Banner">
+            <img id="logohb" src="images/whitelogo.png" alt="White Logo">
+        </div>
+    </div>
+
+    <div class="titlecontainer">
+        <p id="abt">ORDER</p>
+    </div>
+
+    <div class="popupcontainer">
+        <div class="popup">
+            <span><b>FREE SHIPPING</b> within Metro Manila!</span>
+            <span>Order now and get <b>10% OFF!</b></span>
+        </div>
+    </div>
+
+    <!-- John's Edits -->
+
+    <div id="page-content">
+
+        <form id="order-form" action="/upload" method="POST" enctype="multipart/form-data" >
+
+            <fieldset id="details-container">
+
+                <legend>&#160;Order Details&#160;</legend>
+    
+                <div id="order-section">
+
+                    <div>
+
+                        <p>Size(inches):</p>
+
+                        <div id="size">
+
+                            <input id="height" type="text" placeholder="Height">
+                            <input id="width" type="text" placeholder="Width">
+
+                        </div>
+
+                        <p id="size-price">Price: PHP 0.00</p>
+
+                    </div>
+
+                    <br>
+
+                    <div>
+
+                        <p>Quantity:</p>
+
+                        <div id="quantity">
+
+                            <input id="amount" type="text" placeholder="Quantity">
+
+                        </div>
+
+                        <p id="amount-price">Price: PHP 0.00</p>
+
+                    </div>
+
+                    <br>
+                    
+                    <div>
+
+                        <p>Upload Photo Here:</p>
+
+                        <div id="file-upload">
+
+                            <input id="photo" type="file">
+
+                        </div>
+                        
+                        <p>The photos uploaded will be used to guide us in making your customized rug.</p>
+
+                    </div>
+
+                    <br>
+
+                    <div>
+
+                        <p>Notes:</p>
+
+                        <textarea name="notes1" id="notes1" placeholder="Type your notes here"></textarea>
+
+                        <p>The seller may reach out to you in the future for consultation.</p>
+
+                        <br>
+
+                    </div>
+
+                </div>
+                
+                <div id="image-section">
+
+                    <p>Image Preview:</p>
+
+                    <br>
+
+                    <img id="image-preview" src="" alt="Uploaded Image Preview" style="max-width: 100%; height: auto; display: none;">
+
+                </div>
+    
+                <div id="logo-section">
+    
+                    <img id="details-logo" src="images/whitelogo.png" alt="">
+    
+                </div>
+    
+            </fieldset>
+
+            <fieldset id="billing-container">
+
+                <legend>&#160;Billing and Shipping Information&#160;</legend>
+                
+                <div id="user-section">
+
+                    <p>First Name:</p>
+                    <input id="fname" type="text" placeholder="John">
+
+                    <p>Last Name:</p>
+                    <input id="lname" type="text" placeholder="Doe">
+
+                    <p>Active Email:</p>
+                    <input id="email" type="text" placeholder="johndoe@gmail.com">
+
+                    <p>Instagram Username:</p>
+                    <input id="instagram" type="text" placeholder="@JohnDoe">
+
+                    <p>Mobile Number:</p>
+                    <input id="number" type="text" placeholder="09*********">
+
+                </div>
+
+                <div id="location-section">
+
+                    <p>Address:</p>
+                    <textarea name="address" id="address" placeholder="Type your address here"></textarea>
+                    
+
+                    <p>Notes:</p>
+                    <textarea name="notes2" id="notes2" placeholder="Type your notes here"></textarea>
+                    
+
+                </div>
+
+            </fieldset>
+
+            <fieldset id="payment-container">
+
+                <legend>&#160;Payment Details&#160;</legend>
+                
+                <div id="gcash-section">
+
+                    <p>GCash</p>
+                    <img id="gcashQR" src="gcashQR.jpg" alt="GCashQR">
+                </div>
+
+                <div id="bank-section">
+
+                    <p>Bank</p>
+                    <img id="bankQR" src="bankQR.jpg" alt="BankQR">
+
+                </div>
+
+                <div id="proof-section">
+
+                    <p>Upload Proof of Payment Here:</p>
+
+                    <div id="payment-upload">
+
+                        <input id="proof" type="file">
+
+                    </div>
+
+                    <div id="preview-container"></div>
+
+                </div>
+
+            </fieldset>
+
+            <p id="finalized">Finalized Everything?</p>
+
+            <input id="submit" type="submit">
+    
+        </form>
+
+    </div>
+
+    <!-- John's Edits -->
+
+    <div class="footercontainer">
+        <img id="footerlogo" src="images/whitelogo.png" alt="Logo">
+        <div class="ftrlefttext">
+            <div class="phone">
+                <img id="phone" src="images/phone.png" alt="Phone">
+                <div>+63 9762682977</div>
+            </div>
+
+            <div class="ig">
+                <img id="iglogo" src="images/iglogo.png" alt="Instagram Logo">
+                <div>@tiyarjiz</div>
+            </div>
+
+            <div id="biqc">Based in Quezon City.</div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('hamburger').addEventListener('click', function() {
+        const navlinks = document.getElementById('navlinks');
+        navlinks.classList.toggle('show');
+    
+        this.style.color = 'white'; 
+        
+        });
+
+        
+
+        function scroll()
+        {
+            let progress = document.getElementById("progress");
+            let docHeight = document.documentElement.scrollHeight;
+            let vpHeight = window.innerHeight;
+
+            let percentage = (scrollY / (docHeight - vpHeight)) * 100;
+            progress.style.width = percentage + "%"
+        }
+        
+        window.onscroll = scroll;
+
+        window.onload = scroll;
+        
+        let height = document.getElementById("height");
+        let width = document.getElementById("width");
+        let priceSize = document.getElementById("size-price");
+        let quantity = document.getElementById("amount");
+        let priceQuantity = document.getElementById("amount-price");
+
+        let calculatedSize = 0;
+
+        function updatePrice() 
+        {
+            let heightValue = Number(height.value);
+            let widthValue = Number(width.value);
+
+            calculatedSize = heightValue * widthValue * 15;
+
+            priceSize.innerHTML = "Price: PHP " + calculatedSize.toFixed(2);
+
+            updateQuantity();
+        }
+
+        function updateQuantity() 
+        {
+            let quantityValue = Number(quantity.value);
+
+            let calculatedQuantity = calculatedSize * quantityValue;
+
+            priceQuantity.innerHTML = "Price: PHP " + calculatedQuantity.toFixed(2);
+        }
+
+        height.addEventListener("keyup", updatePrice);
+        width.addEventListener("keyup", updatePrice);
+
+        amount.addEventListener("keyup", updateQuantity);
+
+        let photoInput = document.getElementById("photo");
+        let imagePreview = document.getElementById("image-preview");
+
+        photoInput.addEventListener("change", function () 
+        {
+
+            let file = photoInput.files[0];
+
+            if (file) 
+            {
+
+                if (file.type.startsWith("image/")) 
+                {
+                    let reader = new FileReader();
+
+                    reader.onload = function (event) 
+                    {
+                        imagePreview.src = event.target.result;
+                        imagePreview.style.display = "block";
+                    };
+
+                    reader.readAsDataURL(file);
+                } 
+                else 
+                {
+                    alert("Please upload a valid image file.");
+                    // photoInput.value = ""; 
+                    imagePreview.style.display = "none";
+                }
+            }
+            else 
+            {
+                imagePreview.style.display = "none";
+            }
+            
+        });
+
+        const proofInput = document.getElementById('proof');
+    const previewContainer = document.getElementById('preview-container');
+
+    // Add event listener for the file input
+    proofInput.addEventListener('change', function (event) {
+        // Clear any previous previews
+        previewContainer.innerHTML = '';
+
+        const file = event.target.files[0];
+
+        // Check if a file was selected and if it's an image
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                // Create an image element
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.alt = 'Proof of Payment Preview';
+                img.style.maxWidth = '100%'; // Adjust image styling as needed
+                img.style.maxHeight = '300px';
+                img.style.border = '1px solid #ccc';
+                img.style.marginTop = '10px';
+
+                // Append the image to the preview container
+                previewContainer.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            previewContainer.textContent = 'Please upload a valid image file.';
+        }
+    });
+
+    </script>
+</body>
+</html>

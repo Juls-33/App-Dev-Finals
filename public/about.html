@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="about-style.css">
 </head>
 <body>
+    
     <div id="progress"></div>
     <div id="negative"></div>
     
@@ -158,13 +159,6 @@
     </div>
 
     <script>
-        document.getElementById('hamburger').addEventListener('click', function() {
-        const navlinks = document.getElementById('navlinks');
-        navlinks.classList.toggle('show');
-    
-        this.style.color = 'white'; 
-        
-        });
 
         function scroll()
         {
@@ -173,68 +167,22 @@
             let vpHeight = window.innerHeight;
 
             let percentage = (scrollY / (docHeight - vpHeight)) * 100;
-            progress.style.width = percentage + "%"
+            progress.style.width = percentage + "%";
         }
         
         window.onscroll = scroll;
 
         window.onload = scroll;
+        
+        document.getElementById('hamburger').addEventListener('click', function() {
+        const navlinks = document.getElementById('navlinks');
+        navlinks.classList.toggle('show');
+    
+        this.style.color = 'white'; 
+        
+        });
 
-        let artistIndex = 1;
-        showArtistImage(artistIndex);
-
-        function nextArtistImage(a)
-        {
-            showArtistImage(artistIndex += a);
-        }
-
-        function showArtistImage(a)
-        {
-            const artistImages = document.getElementsByClassName("artist-images");
-
-            if(a > artistImages.length)
-                artistIndex = 1;
-            else if(a <1)
-                artistIndex = artistImages.length;
-            else
-                artistIndex = a;
-
-            for(let b = 0 ; b < artistImages.length ; b++)
-            {
-                artistImages[b].style.display = "none";
-            }
-
-            artistImages[artistIndex - 1].style.display = "block";
-        }
-
-        let aboutIndex = 1;
-        showAboutImage(aboutIndex);
-
-        function nextAboutImage(x) 
-        {
-            showAboutImage(aboutIndex += x);
-        }
-
-        function showAboutImage(x) 
-        {
-            const aboutImages = document.getElementsByClassName("about-images");
-
-            if (x > aboutImages.length)
-                aboutIndex = 1;
-            else if (x < 1)
-                aboutIndex = aboutImages.length;
-            else
-                aboutIndex = x;
-
-            for (let y = 0; y < aboutImages.length; y++) {
-                aboutImages[y].style.display = "none";
-            }
-
-            aboutImages[aboutIndex - 1].style.display = "block";
-        }
-
-       
-
+        
 
     </script>
 </body>
