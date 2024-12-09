@@ -81,7 +81,36 @@ const orderSchema = new mongoose.Schema({
   },
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'userData'}
 }, { timestamps: true });
-
+const completedOrderSchema = new mongoose.Schema({
+  size: String,
+  quantity: String,
+  price: String,
+  photo:{
+    filename: String,
+    filepath: String,
+    uploadedAt: { type: Date, default: Date.now },
+  },
+  notes1: String,
+  first_name: String,
+  last_name: String,
+  email: String,
+  ig_username: String,
+  mobile_number: String,
+  address: String,
+  notes2: String,
+  proof:{
+    filename: String,
+    filepath: String,
+    uploadedAt: { type: Date, default: Date.now },
+  },
+  trackingNumber: String,
+  delivery: String,
+  proofs: {
+      filename: String,
+      filepath: String,
+  },
+  user: {type: mongoose.Schema.Types.ObjectId, ref: 'userData'}
+}, { timestamps: true });
 //name of the collection and saving new data from form.html to a new collection record
 const collection = 'users';
 const inquiryCollection = 'inquiries'
@@ -90,7 +119,7 @@ const completedOrdersCollection = 'completedOrders'
 const userData = mongoose.model('userData', dataScheme, collection);
 const inquiriesData = mongoose.model('inquiriesData', userInquirySchema, inquiryCollection);
 const orderData = mongoose.model('orderData', orderSchema, orderCollection);
-const completedOrderData = mongoose.model("completedOrderData", orderSchema, completedOrdersCollection);
+const completedOrderData = mongoose.model("completedOrderData", completedOrderSchema, completedOrdersCollection);
 module.exports = { userData, inquiriesData, orderCollection, completedOrderData};
 
 
@@ -171,6 +200,17 @@ app.get("/admin-orders", async (req, res) => {
     res.status(500).json({ error: "An error occurred while fetching orders" });
   }
 })
+app.get("/completed-orders", async (req, res) => {
+  try {
+    const completedOrders = await completedOrderData.find().populate("user", "first_name last_name email");
+    if (!completedOrders || completedOrders.length === 0) {
+      return res.status(404).json({ message: "No completed orders found." });
+    }
+    res.json(completedOrders);
+  } catch (err) {
+    res.status(500).json({ error: "Error in fetching orders" });
+  }
+});
 // Serve the login page
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -334,6 +374,34 @@ app.post('/userdata', async (req,res)=>{
   }
   else{
     res.send('You must be logged in to submit the form');
+  }
+});
+app.post("/completed-task", upload.single("tracking"), async (req,res)=>{
+  const {trackingNumber, delivery, orderId} = req.body;
+  const file = req.file;
+
+  try{
+    const orderId = orderId;
+    const order = await orderData.findById(orderId);
+    if(!order)return res.status(404).json({error: "Order not found"});
+
+    const completedOrder = new completedOrderData({
+      ...order.toObject(),
+      trackingNumber: trackingNumber,
+      deliver: delivery,
+      proofs:{
+        filename: req.files.originalname,
+        filepath: `uploads/${req.file.filename}`
+      }
+    });
+    await completedOrder.save();
+    await orderData.findByIdAndDelete(orderId);
+
+    res.status(200).json({message: "Order completed and is moved to Completed Orders."})
+  }
+  catch (err){
+    console.log(err);
+    res.status(500).json({error: "An error occurred"});
   }
 });
 
