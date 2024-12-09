@@ -285,7 +285,7 @@
             let heightValue = Number(height.value);
             let widthValue = Number(width.value);
 
-            calculatedSize = heightValue * widthValue * 15;
+            calculatedSize = heightValue * widthValue * 5;
 
             priceSize.innerHTML = "Price: PHP " + calculatedSize.toFixed(2);
 
@@ -333,7 +333,6 @@
                 else 
                 {
                     alert("Please upload a valid image file.");
-                    // photoInput.value = ""; 
                     imagePreview.style.display = "none";
                 }
             }

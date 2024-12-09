@@ -114,9 +114,14 @@
 
 #page-content
 {
-    background-color: #000000;
+    background-color: rgba(71, 184, 221, 0.599);
     padding: 3vw;
     color: white;
+}
+
+input[type = "text"], textarea
+{
+    padding: 0 5px;
 }
 
 #details-container, #billing-container, #payment-container
@@ -158,6 +163,11 @@
 input[type = "file"]
 {
     color: black;
+}
+
+input[type = "file"]:last-child
+{
+    color: white;
 }
 
 #image-section
