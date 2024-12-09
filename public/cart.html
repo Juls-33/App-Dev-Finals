@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TRG | Cart Page</title>
     <link rel="icon" type="image/x-icon" href="images/logo.png">
-    <link rel="stylesheet" href="headerfooter-style.css">
+    <link rel="stylesheet" href="cartheaderfooter-style.css">
     <link rel="stylesheet" href="cart-style.css">
 </head>
 <body>
@@ -59,22 +59,32 @@
 
 <div class="ordercont">
     <div class="order1">
-        <p>Order # 0123</p>
-        <p>Order Placed on October 18, 2024 6:14 PM.</p>
+        <p><b>Order # </b></p>
+        <p>Order Placed on .</p>
         <div class="img-container">
             <h4>Photo:</h4>
             <img src="images/1.PNG" alt="Photo">
         </div>
-        <p><u>View Order Details.</u></p>
+        <p><u class="view-details">View Details</u></p>
     </div>
 
-    <div class="order1">
-        <p>Order # 0124</p>
-        <p>Order Placed on October 18, 2024 6:14 PM.</p>
-        <p><u>View Order Details.</u></p>    
+    <div id="order-popup" class="order-popup">
+        <div class="popup-content">
+            <button class="close-btn" id="closeBtn">&times;</button>
+            <h2>Order Details</h2>
+            <p>Order # </p>
+            <p>Order Placed on .</p>
+            <p>Name: </p>
+            <p>Address: </p>
+            <p>Size: </p>
+            <p>Quantity: </p>
+            <p>Price: </p>
+            <p>Note/s: </p>
+        </div>
     </div>
+   
 
-    <p>No other orders. <a href="order.html"><u>Place new order?</u></a></p>
+    <p>No other orders. <a href="orderV2.html"><u>Place new order?</u></a></p>
 </div>
 
 
@@ -160,6 +170,27 @@
         window.onscroll = scroll;
 
         window.onload = scroll;
+
+        const popup = document.getElementById("order-popup");
+        const viewDetails = document.querySelector(".view-details");
+
+        viewDetails.addEventListener("click", function() {
+        popup.style.display = "flex"; 
+        });
+
+        function closePopup() {
+    popup.style.display = "none"; 
+    }
+
+        window.onclick = function(event) {
+        if (event.target === popup) {
+        popup.style.display = "none";
+    }
+        };
+
+    const closeBtn = document.getElementById("closeBtn");
+    closeBtn.addEventListener("click", closePopup);  
+
     </script>
 </body>
 </html>

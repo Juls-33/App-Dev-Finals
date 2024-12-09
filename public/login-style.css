@@ -7,10 +7,25 @@
     font-family: 'Poppins', sans-serif;
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); 
+    }
+}
+
 body{
     background-image: url('images/bg.jpg');
     background-size: cover;
     background-position: center;
+    animation-name: fadeIn;
+    animation-duration: .4s;
+    animation-timing-function: ease-in-out; 
+    animation-fill-mode: forwards; 
 }
 
 #logohb {

@@ -9,6 +9,16 @@
 }
 
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); 
+    }
+}
 
 .headerbanner {
     width: 100%;
@@ -32,6 +42,13 @@
     z-index: 1;
     width: 100%; 
     max-width: 150px; 
+}
+
+body{
+    animation-name: fadeIn;
+    animation-duration: .4s;
+    animation-timing-function: ease-in-out; 
+    animation-fill-mode: forwards; 
 }
 
 .titlecontainer {
