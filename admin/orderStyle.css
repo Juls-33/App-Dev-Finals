@@ -196,7 +196,7 @@ body{
     border: solid #838181 2px;
     border-radius: 10px;
     width: 90%;
-    height: 80%;
+    /* height: 80%; */
     padding: 1rem;
     box-shadow: var(--dropShadow);
 }
