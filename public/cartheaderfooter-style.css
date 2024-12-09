@@ -88,7 +88,6 @@ body {
 #cart {
     width: 2em;
     margin-left: .3em;
-    margin-bottom: .3em;
 }
 
 #profile {
@@ -222,7 +221,7 @@ a {
     
     #cart {
         width: 2em;
-        transform: translateY(0.4em);
+        transform: translateY(0.2em);
     }
 
     #profile {
