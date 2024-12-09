@@ -7,7 +7,23 @@
     font-family: 'Poppins', sans-serif;
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); 
+    }
+}
 
+body{
+    animation-name: fadeIn;
+    animation-duration: .4s;
+    animation-timing-function: ease-in-out; 
+    animation-fill-mode: forwards; 
+}
 
 .headerbanner {
     width: 100%;
