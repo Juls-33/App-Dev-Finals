@@ -381,7 +381,6 @@ app.post("/completed-task", upload.single("tracking"), async (req,res)=>{
   const file = req.file;
 
   try{
-    const orderId = orderId;
     const order = await orderData.findById(orderId);
     if(!order)return res.status(404).json({error: "Order not found"});
 
@@ -390,7 +389,7 @@ app.post("/completed-task", upload.single("tracking"), async (req,res)=>{
       trackingNumber: trackingNumber,
       deliver: delivery,
       proofs:{
-        filename: req.files.originalname,
+        filename: req.file.originalname,
         filepath: `uploads/${req.file.filename}`
       }
     });

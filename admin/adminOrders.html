@@ -137,6 +137,7 @@
                                 </select>
                             </span>
                         </div>
+                        <input type="hidden" name="orderId" id="orderId" value="${selectedOrder._id}">
                         <div class="container-buttons">
                             <button id="cancel-order">Cancel Order</button>
                             <button type="submit" id="complete-order" order-id="${selectedOrder._id}">Complete Order</button>
@@ -150,7 +151,7 @@
                     event.preventDefault();
                     const trackingNumber = document.getElementById("trackingNumber").value;
                     const deliveryCourier = document.getElementById("delivery").value;
-                    const orderId = document.getElementById("complete-order").getAttribute("order-id");
+                    const orderId = document.getElementById("orderId").value;
 
                     const formData = new FormData();
                     formData.append("trackingNumber", trackingNumber);
