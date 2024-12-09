@@ -86,10 +86,12 @@ const orderSchema = new mongoose.Schema({
 const collection = 'users';
 const inquiryCollection = 'inquiries'
 const orderCollection = 'orders'
+const completedOrdersCollection = 'completedOrders'
 const userData = mongoose.model('userData', dataScheme, collection);
 const inquiriesData = mongoose.model('inquiriesData', userInquirySchema, inquiryCollection);
 const orderData = mongoose.model('orderData', orderSchema, orderCollection);
-module.exports = { userData, inquiriesData, orderCollection};
+const completedOrderData = mongoose.model("completedOrderData", orderSchema, completedOrdersCollection);
+module.exports = { userData, inquiriesData, orderCollection, completedOrderData};
 
 
 //GET (serving pages) and serving data from db
