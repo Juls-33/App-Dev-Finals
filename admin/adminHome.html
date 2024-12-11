@@ -110,6 +110,23 @@
                     pendingOrders++;
                 }
                 document.getElementsByClassName('small-card-contents')[3].innerHTML = `${pendingOrders} orders`;
+
+                const response2 = await fetch("/completed-orders");
+                const completedOrderJSON = await response2.json();
+                let completedOrders = 0;
+                for (let i = 0; i<completedOrderJSON.length; i++){
+                    completedOrders++;
+                }
+                let totalEarnings = 0;
+                completedOrderJSON.forEach(order => {
+                    let price = parseFloat(order.price);
+                    if(!isNaN(price)) totalEarnings += price;
+                })
+                const smallCardText = document.querySelectorAll(".small-card-contents");
+                smallCardText[0].innerHTML= `Php ${totalEarnings}`;
+                smallCardText[1].innerHTML= `Php ${totalEarnings}`;
+                smallCardText[2].innerHTML= `${completedOrders} orders`;
+
                 // Render orders
                 const ordersHTML = orders.map(order => {
                 return `
