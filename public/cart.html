@@ -141,19 +141,58 @@
                             <h4>Photo:</h4>
                             <img src="/${order.photo.filepath}" alt="Photo">
                         </div>
-                        <p><u>View Order Details.</u></p>
+                        <p><u class="view-details" data-id="${order._id}">View Order Details.</u></p>
                     </div>
                     `
                 }).join("");
                 orderContainer[0].innerHTML = ordersHTML;
+
+                document.querySelectorAll(".view-details").forEach(button => {
+                button.addEventListener("click", function () {
+                    const orderId = this.getAttribute("data-id");
+                    const order = orders.find(o => o._id === orderId);
+                    showOrderDetails(order);
+                });
+            });
             }
             catch (err){
                 console.log("Error fetching user orders:", err );
                 orderContainer[0].innerHTML = `<p> An errro occured while fetching the orders.</p>`
-            }
-           
-            
+            } 
         }
+
+        function showOrderDetails(order) {
+            const popup = document.getElementById("order-popup");
+            const popupContent = document.querySelector(".popup-content");
+
+            popupContent.innerHTML = `
+                <button class="close-btn" id="closeBtn">&times;</button>
+                <h2>Order Details</h2>
+                <p><b>Order #</b> ${order._id}</p>
+                <p><b>Order Placed on:</b> ${new Date(order.createdAt).toLocaleString()}</p>
+                <p><b>Name:</b> ${order.name}</p>
+                <p><b>Address:</b> ${order.address}</p>
+                <p><b>Size:</b> ${order.size}</p>
+                <p><b>Quantity:</b> ${order.quantity}</p>
+                <p><b>Price:</b> ${order.price}</p>
+                <p><b>Note/s:</b> ${order.notes}</p>
+            `;
+
+            popup.style.display = "flex";
+
+            document.getElementById("closeBtn").addEventListener("click", closePopup);
+            window.onclick = function (event) {
+                if (event.target === popup) {
+                    closePopup();
+                }
+            };
+        }
+
+        function closePopup() {
+            const popup = document.getElementById("order-popup");
+            popup.style.display = "none";
+        }
+
         fetchOrders();
 
         
@@ -179,17 +218,17 @@
         });
 
         function closePopup() {
-    popup.style.display = "none"; 
-    }
+        popup.style.display = "none"; 
+        }
 
-        window.onclick = function(event) {
-        if (event.target === popup) {
-        popup.style.display = "none";
-    }
-        };
+            window.onclick = function(event) {
+            if (event.target === popup) {
+            popup.style.display = "none";
+        }
+            };
 
-    const closeBtn = document.getElementById("closeBtn");
-    closeBtn.addEventListener("click", closePopup);  
+        const closeBtn = document.getElementById("closeBtn");
+        closeBtn.addEventListener("click", closePopup);  
 
     </script>
 </body>
