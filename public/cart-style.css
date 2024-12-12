@@ -184,10 +184,10 @@ body::before {
     cursor: pointer;
 }
 
-.order-popup {
+#order-popup {
     display: none; 
     position: fixed; 
-    z-index: 1000; 
+    z-index: 10000; 
     left: 0;
     top: 0;
     width: 100%;
@@ -197,7 +197,7 @@ body::before {
     align-items: center;
 }
 
-.popup-content {
+#popup-content {
     background-color: #fff;
     margin: 15% auto;
     padding: 20px;
@@ -224,4 +224,7 @@ body::before {
 
 .close-btn:hover {
     color: darkblue; 
+}
+.hidden {
+    display: none;
 }

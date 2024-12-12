@@ -57,7 +57,7 @@
         </div>
     </div>
 
-<div class="ordercont">
+    <div class="ordercont">
     <div class="order1">
         <p><b>Order # </b></p>
         <p>Order Placed on .</p>
@@ -67,34 +67,10 @@
         </div>
         <p><u class="view-details">View Details</u></p>
     </div>
-
-    <div id="order-popup" class="order-popup">
-        <div class="popup-content">
-            <button class="close-btn" id="closeBtn">&times;</button>
-            <h2>Order Details</h2>
-            <p>Order # </p>
-            <p>Order Placed on .</p>
-            <p>Name: </p>
-            <p>Address: </p>
-            <p>Size: </p>
-            <p>Quantity: </p>
-            <p>Price: </p>
-            <p>Note/s: </p>
-        </div>
-    </div>
    
 
     <p>No other orders. <a href="orderV2.html"><u>Place new order?</u></a></p>
 </div>
-
-
-
-
-
-
-
-
-    
     <div class="footercontainer">
         <img id="footerlogo" src="images/whitelogo.png" alt="Logo">
         <div class="ftrlefttext">
@@ -120,78 +96,84 @@
         this.style.color = 'white'; 
         
         });
-        async function fetchOrders(){
-            try{
+        async function fetchOrders() {
+            try {
                 const orderContainer = document.getElementsByClassName("ordercont");
                 const response = await fetch("/user-orders");
                 if (!response) throw new Error("Unable to fetch orders");
 
                 const orders = await response.json();
-                if(orders.length === 0){
-                   orderContainer[0].innerHTML = "<p> You have no orders yet. </p>";
+                if (orders.length === 0) {
+                    orderContainer[0].innerHTML = "<p> You have no orders yet. </p>";
                     return;
                 }
-                const ordersHTML = orders.map(order => {    
-                    console.log(order.photo.filepath);
-                    return `
-                    <div class="order1">
-                        <p>Order # ${order._id}</p>
-                        <p>Order Placed on ${new Date(order.createdAt).toLocaleString()}</p>
-                        <div class="img-container"> 
-                            <h4>Photo:</h4>
-                            <img src="/${order.photo.filepath}" alt="Photo">
+
+                const ordersHTML = orders
+                    .map(order => {
+                        return `
+                        <div class="order1">
+                            <p>Order # ${order._id}</p>
+                            <p>Order Placed on ${new Date(order.createdAt).toLocaleString()}</p>
+                            <div class="img-container"> 
+                                <h4>Photo:</h4>
+                                <img src="/${order.photo.filepath}" alt="Photo">
+                            </div>
+                            <p><u class="view-details" data-id="${order._id}">View Order Details.</u></p>
                         </div>
-                        <p><u class="view-details" data-id="${order._id}">View Order Details.</u></p>
-                    </div>
-                    `
-                }).join("");
+                        `;
+                    })
+                    .join("");
                 orderContainer[0].innerHTML = ordersHTML;
 
                 document.querySelectorAll(".view-details").forEach(button => {
-                button.addEventListener("click", function () {
-                    const orderId = this.getAttribute("data-id");
-                    const order = orders.find(o => o._id === orderId);
-                    showOrderDetails(order);
+                button.addEventListener("click", async (event) => {
+                    const orderId = event.target.getAttribute("data-id");
+                    const orderCard = event.target.closest(".order1");
+
+                    if (orderCard.querySelector(".order-details")) {
+                        const detailsSection = orderCard.querySelector(".order-details");
+                        if (detailsSection) {
+                            detailsSection.classList.toggle("hidden");
+                            event.target.textContent = detailsSection.classList.contains("hidden")
+                                ? "View Order Details"
+                                : "Hide Details";
+                            return;
+                        }
+                    }
+                    try {
+                        // const response = await fetch(`/user-orders`);
+                        // if (!response.ok) throw new Error("Failed to fetch order details");
+
+                        const order = orders.find(o => o._id === orderId);
+
+                        const detailsHTML = `
+                            <div class="order-details">
+                                <p><b>Name:</b> ${order.first_name} ${order.last_name}</p>
+                                <p><b>Size:</b> ${order.size}</p>
+                                <p><b>Quantity:</b> ${order.quantity}</p>
+                                <p><b>Price:</b> ${order.price}</p>
+                                <p><b>Address:</b> ${order.address}</p>
+                                <p><b>Mobile Number:</b> ${order.mobile_number}</p>
+                                <p><b>Email:</b> ${order.email}</p>
+                                <p><b>Instagram Username:</b> ${order.ig_username}</p>
+                                <p><b>Note/s:</b> ${order.notes1}</p>
+                            </div>
+                        `;
+                        orderCard.insertAdjacentHTML("beforeend", detailsHTML);
+                    } catch (error) {
+                        console.error("Error fetching order details:", error);
+                        const errorHTML = `<p class="order-details">An error occurred while fetching the order details.</p>`;
+                        orderCard.insertAdjacentHTML("beforeend", errorHTML);
+                    }
                 });
             });
+            } catch (err) {
+                console.log("Error fetching user orders:", err);
+                orderContainer[0].innerHTML = `<p> An error occurred while fetching the orders.</p>`;
             }
-            catch (err){
-                console.log("Error fetching user orders:", err );
-                orderContainer[0].innerHTML = `<p> An errro occured while fetching the orders.</p>`
-            } 
         }
+        
 
-        function showOrderDetails(order) {
-            const popup = document.getElementById("order-popup");
-            const popupContent = document.querySelector(".popup-content");
-
-            popupContent.innerHTML = `
-                <button class="close-btn" id="closeBtn">&times;</button>
-                <h2>Order Details</h2>
-                <p><b>Order #</b> ${order._id}</p>
-                <p><b>Order Placed on:</b> ${new Date(order.createdAt).toLocaleString()}</p>
-                <p><b>Name:</b> ${order.name}</p>
-                <p><b>Address:</b> ${order.address}</p>
-                <p><b>Size:</b> ${order.size}</p>
-                <p><b>Quantity:</b> ${order.quantity}</p>
-                <p><b>Price:</b> ${order.price}</p>
-                <p><b>Note/s:</b> ${order.notes}</p>
-            `;
-
-            popup.style.display = "flex";
-
-            document.getElementById("closeBtn").addEventListener("click", closePopup);
-            window.onclick = function (event) {
-                if (event.target === popup) {
-                    closePopup();
-                }
-            };
-        }
-
-        function closePopup() {
-            const popup = document.getElementById("order-popup");
-            popup.style.display = "none";
-        }
 
         fetchOrders();
 
@@ -209,26 +191,6 @@
         window.onscroll = scroll;
 
         window.onload = scroll;
-
-        const popup = document.getElementById("order-popup");
-        const viewDetails = document.querySelector(".view-details");
-
-        viewDetails.addEventListener("click", function() {
-        popup.style.display = "flex"; 
-        });
-
-        function closePopup() {
-        popup.style.display = "none"; 
-        }
-
-            window.onclick = function(event) {
-            if (event.target === popup) {
-            popup.style.display = "none";
-        }
-            };
-
-        const closeBtn = document.getElementById("closeBtn");
-        closeBtn.addEventListener("click", closePopup);  
 
     </script>
 </body>
