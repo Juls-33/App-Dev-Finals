@@ -300,6 +300,9 @@ app.post('/login', async (req, res) => {
         res.redirect('/admin');
       } else {
         res.send('Invalid credentials');
+        setTimeout(() => {
+          res.redirect('/login');
+        }, 3000);
       }
     }
     else{
