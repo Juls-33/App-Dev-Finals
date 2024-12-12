@@ -41,13 +41,13 @@
                     <span class="small-card-icon"><img src="images/cart2.png" alt="cart"></span>
                 </div>
             </div>
-            <div class="big-card">
-                <span class="big-card-title">Priority Orders <a href="adminOrders.html"><button>VIEW ALL ORDERS</button></a></span>
-                <span class="big-card-orders">
-                    
-                </span>
-            </div>
-            <div class="bottom-container" onWheel= "this.scrollLeft+=event.deltaY>0?100:-100" >
+            <div class="bottom-container">
+                <div class="big-card">
+                    <span class="big-card-title">Priority Orders <a href="adminOrders.html"><button>VIEW ALL ORDERS</button></a></span>
+                    <span class="big-card-orders">
+                        
+                    </span>
+                </div>
                 <div class="message-card">
                     <span class="message-card-title">
                         <span class="message-flex-container">
@@ -85,6 +85,10 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- <div class="bottom-container" onWheel= "this.scrollLeft+=event.deltaY>0?100:-100" > -->
+                
+            <!-- </div> -->
         </div>
     </div>
     <script>
@@ -106,6 +110,23 @@
                     pendingOrders++;
                 }
                 document.getElementsByClassName('small-card-contents')[3].innerHTML = `${pendingOrders} orders`;
+
+                const response2 = await fetch("/completed-orders");
+                const completedOrderJSON = await response2.json();
+                let completedOrders = 0;
+                for (let i = 0; i<completedOrderJSON.length; i++){
+                    completedOrders++;
+                }
+                let totalEarnings = 0;
+                completedOrderJSON.forEach(order => {
+                    let price = parseFloat(order.price);
+                    if(!isNaN(price)) totalEarnings += price;
+                })
+                const smallCardText = document.querySelectorAll(".small-card-contents");
+                smallCardText[0].innerHTML= `Php ${totalEarnings}`;
+                smallCardText[1].innerHTML= `Php ${totalEarnings}`;
+                smallCardText[2].innerHTML= `${completedOrders} orders`;
+
                 // Render orders
                 const ordersHTML = orders.map(order => {
                 return `
@@ -118,6 +139,7 @@
                             <img src="${order.photo.filepath}" alt="image" width=100px>
                         </span>
                     </div>
+                    <hr>
                 `;
                 }).join("");
 

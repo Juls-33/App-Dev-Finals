@@ -46,7 +46,14 @@
                 for (let i=0; i<orders.length; i++){
                     pendingOrders++;
                 }
+                const response2 = await fetch("/completed-orders");
+                const completedOrderJSON = await response2.json();
+                let completedOrders = 0
+                for (let i = 0; i<completedOrderJSON.length; i++){
+                    completedOrders++;
+                }
                 document.getElementsByClassName('order-status')[0].innerHTML = `Pending Orders: ${pendingOrders}`;
+                document.getElementsByClassName('order-status')[1].innerHTML = `Completed Orders: ${completedOrders}`;
                 // Render orders
                 const ordersHTML = orders.map(order => {
                 return `
@@ -111,7 +118,7 @@
                             <div class="customer-notes">${selectedOrder.notes1 || "No notes provided."}</div>
                         </div>
                     </div>
-                    <form action="">
+                    <form action="/completed-task" method="POST" id="complete-order-form" enctype="multipart/form-data">
                         <div class="container-upload">
                             <div>Upload delivery tracking number</div>
                             <span>
@@ -119,7 +126,7 @@
                             </span>
                             or
                             <span>Tracking Number:
-                                <input type="text">
+                                <input type="text" name="trackingNumber" id="trackingNumber">
                             </span>
                             <span>
                             Delivery Courier:
@@ -130,13 +137,44 @@
                                 </select>
                             </span>
                         </div>
+                        <input type="hidden" name="orderId" id="orderId" value="${selectedOrder._id}">
                         <div class="container-buttons">
                             <button id="cancel-order">Cancel Order</button>
-                            <button id="complete-order">Complete Order</button>
+                            <button type="submit" id="complete-order" order-id="${selectedOrder._id}">Complete Order</button>
                         </div>
                     </form>
                     </div>
                 `;
+                const completeOrderForm = document.getElementById("complete-order-form");
+
+                completeOrderForm.addEventListener("submit", async (event) => {
+                    event.preventDefault();
+                    const trackingNumber = document.getElementById("trackingNumber").value;
+                    const deliveryCourier = document.getElementById("delivery").value;
+                    const orderId = document.getElementById("orderId").value;
+
+                    const formData = new FormData();
+                    formData.append("trackingNumber", trackingNumber);
+                    formData.append("delivery", deliveryCourier);
+                    formData.append("orderId", orderId);
+                    const fileInput = document.getElementById("tracking");
+                    if (fileInput.files.length>0){
+                        formData.append("tracking", fileInput.files[0]);
+                    }
+
+                    try {
+                        const response = await fetch(`/completed-task`, { method: "POST", body: formData, });
+                        const result = await response.json();
+                        if (response.ok) {
+                            alert(result.message);
+                            fetchAllOrders();
+                        } else {
+                            alert(result.error || "Failed to complete order");
+                        }
+                    } catch (err) {
+                        console.error(err);
+                    }
+                });
             } else {
                 mainPanel.innerHTML = "<p>Order details not found.</p>";
             }

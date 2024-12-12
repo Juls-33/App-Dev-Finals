@@ -1,18 +1,20 @@
 // Code structure or syntax was taken from mongodb api, github api, w3school, geekforgeeks, stackoverflow, chatgpt, and microsoft copilot
 // Node.js with express was learned via youtube, w3school, and chatgpt. Lessons from OOP and DSA was used in server.js
-const express = require('express');
-const session = require('express-session');
-const bodyParser = require('body-parser');
-const multer = require('multer');
-const fs = require('fs');
-const path = require('path');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const { Stream } = require('stream');
 
+//Including relevant modules and initializing them in a variable
+const express = require('express'); //express app for get, post, and listen to server request
+const session = require('express-session'); //handling user session
+const multer = require('multer'); //used for handling file uploads
+const cors = require('cors'); //allows sending of form data from different sources (client side)
+const mongoose = require('mongoose'); //connecting to mongoDB
+const bodyParser = require('body-parser'); //parsing data from the client form to req.body
+const path = require('path'); //allows the server to work with paths.
+
+//express app initialization and declaration of port to be used (So the client can access the website)
 const app = express();
 const port = 3000;
 
+//Using different middlewares (To allow server to receive data from the client, serve static folders, and handle user session)
 app.options('*', cors());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'admin')));
@@ -25,11 +27,11 @@ app.use(session({
   saveUninitialized: true
 }))
 
-//conencting to DB
+//conencting to DB (DB username, password, and cluster name are needed to access the database)
 const uri = "mongodb+srv://tiyarjiz:tiyarjiz@cluster0.8qeah.mongodb.net/tiyarjiz?retryWrites=true&w=majority&appName=Cluster0";
 mongoose.connect(uri).then(() => console.log('Connected to MongoDB')).catch(err => console.error('Could not connect to MongoDB', err));
 
-// multer for file uploads
+// multer for handling file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads"); 
@@ -40,8 +42,9 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage: storage });
-//google drive api
-//schema models
+
+//SCHEMA MODELS (different schema is used for different purposes)
+//Stores user credentials
 const dataScheme = new mongoose.Schema({
   first_name: String,
   last_name: String,
@@ -49,6 +52,7 @@ const dataScheme = new mongoose.Schema({
   password: String,
   inquiries: [{type: mongoose.Schema.Types.ObjectId, ref: 'inquiriesData'}]
 });
+//Stores userInquiries
 const userInquirySchema = new mongoose.mongoose.Schema({
   first_name: String,
   last_name: String,
@@ -57,6 +61,7 @@ const userInquirySchema = new mongoose.mongoose.Schema({
   comments: String,
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'userData'}
 });
+//Stores all orders, related to  user schema
 const orderSchema = new mongoose.Schema({
   size: String,
   quantity: String,
@@ -81,15 +86,47 @@ const orderSchema = new mongoose.Schema({
   },
   user: {type: mongoose.Schema.Types.ObjectId, ref: 'userData'}
 }, { timestamps: true });
-
+//Similar to order schema but with added data such as tracking number, proofs, and user
+const completedOrderSchema = new mongoose.Schema({
+  size: String,
+  quantity: String,
+  price: String,
+  photo:{
+    filename: String,
+    filepath: String,
+    uploadedAt: { type: Date, default: Date.now },
+  },
+  notes1: String,
+  first_name: String,
+  last_name: String,
+  email: String,
+  ig_username: String,
+  mobile_number: String,
+  address: String,
+  notes2: String,
+  proof:{
+    filename: String,
+    filepath: String,
+    uploadedAt: { type: Date, default: Date.now },
+  },
+  trackingNumber: String,
+  delivery: String,
+  proofs: {
+      filename: String,
+      filepath: String,
+  },
+  user: {type: mongoose.Schema.Types.ObjectId, ref: 'userData'}
+}, { timestamps: true });
 //name of the collection and saving new data from form.html to a new collection record
 const collection = 'users';
 const inquiryCollection = 'inquiries'
 const orderCollection = 'orders'
+const completedOrdersCollection = 'completedOrders'
 const userData = mongoose.model('userData', dataScheme, collection);
 const inquiriesData = mongoose.model('inquiriesData', userInquirySchema, inquiryCollection);
 const orderData = mongoose.model('orderData', orderSchema, orderCollection);
-module.exports = { userData, inquiriesData, orderCollection};
+const completedOrderData = mongoose.model("completedOrderData", completedOrderSchema, completedOrdersCollection);
+module.exports = { userData, inquiriesData, orderCollection, completedOrderData};
 
 
 //GET (serving pages) and serving data from db
@@ -111,6 +148,8 @@ app.get('/user-inquiry', async (req, res) => {
     return res.status(401).json({ error: "Unauthorized: You must be logged in." });
   }
 });
+
+//Fetch all user inquiries (regardless of the user) to be displayed in admin page
 app.get('/all-user-inquiries', async (req, res) =>{
   try{
     const inquiries = await inquiriesData.find().populate('user', 'first_name last_name email');
@@ -122,21 +161,8 @@ app.get('/all-user-inquiries', async (req, res) =>{
     res.status(500).json({ error:"Failed to fetch inquiries"});
   }
 });
-app.get('/user-data', async (req, res) =>{
-  if (req.session.user){
-    try{
-      const user = await userData.findOne({username: req.session.user.username}).populate('inquiries');
-      res.json(user);
-    }
-    catch (err){
-      console.log(err);
-      res.send('An error occurred');
-    }
-  }
-  else{
-    res.send('You must be logged in to view your data')
-  }
-});
+
+//fetching user orders to be displayed in cart page
 app.get("/user-orders", async (req, res) => {
   try{
     if (!req.session.user){
@@ -155,6 +181,7 @@ app.get("/user-orders", async (req, res) => {
     res.status(500).json({error: "An error occurred while fetching the orders"});
   }
 });
+//Fetches all orders regardless of user and displays it in the admin page
 app.get("/admin-orders", async (req, res) => {
   try {
     const orders = await orderData.find().populate("user", "first_name last_name email");
@@ -168,26 +195,43 @@ app.get("/admin-orders", async (req, res) => {
     console.error("Error fetching orders:", err);
     res.status(500).json({ error: "An error occurred while fetching orders" });
   }
-})
-// Serve the login page
+});
+//fetches completed orders and displays it in the admin page
+app.get("/completed-orders", async (req, res) => {
+  try {
+    const completedOrders = await completedOrderData.find().populate("user", "first_name last_name email");
+    if (!completedOrders || completedOrders.length === 0) {
+      return res.status(404).json({ message: "No completed orders found." });
+    }
+    res.json(completedOrders);
+  } catch (err) {
+    res.status(500).json({ error: "Error in fetching orders" });
+  }
+});
+//serving index.html
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+//serving lohin page when /login is requested
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname,'public','login.html'));
 });
+//serving signup page when /signup is requested
 app.get('/signup', async (req,res)=>{
   res.sendFile(path.join(__dirname,'createacc.html'));
-})
+});
+//serves admin page
 app.get('/admin', (req, res)=>{
   res.sendFile(path.join(__dirname, 'admin','adminHome.html'));
 });
+//serves index.html along with the username (once the user is logged in)
 app.get('/:username', (req, res)=>{
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 })
 
-//POST (Getting information from website)
-//Handle file upload 
+//POST (Receiving information from the client side website)
+
+//Getting user orders along with file uploads.
 app.post('/upload', upload.fields([{ name: "photo", maxCount: 1 }, { name: "proof", maxCount: 1 },]), async (req, res) =>{
   console.log("PASOK!!");
   const { height, width, quantity, amountPrice, notes1, fname, lname, email, instagram, number, address, notes2} = req.body;
@@ -196,13 +240,14 @@ app.post('/upload', upload.fields([{ name: "photo", maxCount: 1 }, { name: "proo
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  //verify if the user is logegd in
   if (req.session.user){
     console.log("image");
     try{
       if (!req.files.photo || !req.files.proof) {
         return res.status(400).send("Both 'photo' and 'proof' are required!");
       }
-      //save to mongodb
+      //Save data to mongo db
       const newOrder = new orderData({
         size: size,
         quantity: quantity,
@@ -242,10 +287,9 @@ app.post('/upload', upload.fields([{ name: "photo", maxCount: 1 }, { name: "proo
     res.send(' You must be logged in to order')
   }
 });
-// Handle login
+//get user form data and compare it to DB for login purposes
 app.post('/login', async (req, res) => {
   const { Email, Password } = req.body;
-
   try{
     const user = await userData.findOne({username: Email})
     console.log(user);
@@ -274,7 +318,8 @@ app.post('/login', async (req, res) => {
     console.log(e);
   }
 });
-
+//gets from data and saves it to database if there is no exisitng email yet.
+//it handles user sign up
 app.post('/signup', async (req, res)=>{
   const {Firstname, Lastname, Email, Password} = req.body;
   console.log(req.body);
@@ -306,7 +351,7 @@ app.post('/signup', async (req, res)=>{
   }
 })
 
-//form submission
+// handles user inquiry submission
 app.post('/userdata', async (req,res)=>{
   console.log("Wassup");
   if (req.session.user){
@@ -334,7 +379,36 @@ app.post('/userdata', async (req,res)=>{
     res.send('You must be logged in to submit the form');
   }
 });
+//transfer a speciifc order to cmpleted order along with tracking number, receipt and mode of delivery.
+app.post("/completed-task", upload.single("tracking"), async (req,res)=>{
+  const {trackingNumber, delivery, orderId} = req.body;
+  const file = req.file;
 
+  try{
+    const order = await orderData.findById(orderId);
+    if(!order)return res.status(404).json({error: "Order not found"});
+
+    const completedOrder = new completedOrderData({
+      ...order.toObject(),
+      trackingNumber: trackingNumber,
+      deliver: delivery,
+      proofs:{
+        filename: req.file.originalname,
+        filepath: `uploads/${req.file.filename}`
+      }
+    });
+    await completedOrder.save();
+    await orderData.findByIdAndDelete(orderId);
+
+    res.status(200).json({message: "Order completed and is moved to Completed Orders."})
+  }
+  catch (err){
+    console.log(err);
+    res.status(500).json({error: "An error occurred"});
+  }
+});
+
+//listen on port 3000
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
   });
