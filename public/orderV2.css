@@ -24,6 +24,9 @@ body{
     animation-timing-function: ease-in-out; 
     animation-fill-mode: forwards; 
 }
+.center a:hover {
+    color: gray; 
+}
 
 .headerbanner {
     width: 100%;

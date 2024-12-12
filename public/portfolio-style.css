@@ -26,6 +26,7 @@ body {
     animation-fill-mode: forwards; 
 }
 
+
 body::before {
     content: "";
     background: url('images/trg1.jpg') no-repeat center center/cover;
@@ -36,6 +37,10 @@ body::before {
     height: 100%;
     opacity: 0.14;
     z-index: -1;
+}
+
+.center a:hover {
+    color: gray; 
 }
 
 .headerbanner {

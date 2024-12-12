@@ -19,6 +19,9 @@
         transform: translateY(0); 
     }
 }
+.center a:hover {
+    color: gray; 
+}
 
 .headerbanner {
     width: 100%;
